@@ -1,0 +1,42 @@
+package habitos__criacao_monitoramento;
+
+public class Habito {
+	public String nome;
+	public String questao;
+	public String anotacoes;
+	public Lembrete[] lembretes = new Lembrete[10] ;
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getQuestao() {
+		return questao;
+	}
+	
+	public void setQuestao(String questao) {
+		this.questao = questao;
+	}
+	
+	public String getAnotacoes() {
+		return anotacoes;
+	}
+	
+	public void setAnotacoes(String anotacoes) {
+		this.anotacoes = anotacoes;
+	}
+	
+	public Lembrete[] getLembretes() {
+		return lembretes;
+	}
+	
+	public void setLembretes(Lembrete[] lembretes) {
+		this.lembretes = lembretes;
+	}
+	
+	
+}
