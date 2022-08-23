@@ -1,11 +1,18 @@
-package habitos__criacao_monitoramento;
+package modelo;
 
-public class Habito_mensuravel {
+public class Habito_mensuravel extends Habito {
 	private String unidade;
 	private float meta;
 	private float metaCumprida;
-	private int usuarioId;
 	
+	public Habito_mensuravel(String nome, String questao, String anotacoes, Lembrete[] lembretes, String unidade,
+			float meta, float metaCumprida) {
+		super(nome, questao, anotacoes, lembretes);
+		this.unidade = unidade;
+		this.meta = meta;
+		this.metaCumprida = metaCumprida;
+	}
+
 	public String getUnidade() {
 		return unidade;
 	}
@@ -27,20 +34,7 @@ public class Habito_mensuravel {
 	}
 	
 	public void setMetaCumprida(float metaCumprida) {
-		if(getMeta() >= (getMeta() + metaCumprida)) {
-			this.metaCumprida = metaCumprida;
-		} else {
-			System.out.println("Você excedeu a meta");
-		}
+		this.metaCumprida = metaCumprida;
 	}
-	
-	public int getUsuarioId() {
-		return usuarioId;
-	}
-	
-	public void setUsuarioId(int usuarioId) {
-		this.usuarioId = usuarioId;
-	}
-
 	
 }
