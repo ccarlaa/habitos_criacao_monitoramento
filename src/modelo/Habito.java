@@ -5,15 +5,17 @@ public abstract class Habito {
 	public String questao;
 	public String anotacoes;
 	public Lembrete[] lembretes = new Lembrete[10] ;
+	public int id;
 	
-	public Habito(String nome, String questao, String anotacoes, Lembrete[] lembretes) {
+	public Habito(String nome, String questao, String anotacoes, Lembrete[] lembretes, int id) {
 		super();
 		this.nome = nome;
 		this.questao = questao;
 		this.anotacoes = anotacoes;
 		this.lembretes = lembretes;
+		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -45,5 +47,14 @@ public abstract class Habito {
 	public void setLembretes(Lembrete[] lembretes) {
 		this.lembretes = lembretes;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 }

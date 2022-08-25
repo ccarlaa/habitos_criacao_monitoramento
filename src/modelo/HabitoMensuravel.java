@@ -6,8 +6,8 @@ public class HabitoMensuravel extends Habito {
 	private float metaCumprida;
 	
 	public HabitoMensuravel(String nome, String questao, String anotacoes, Lembrete[] lembretes, String unidade,
-			float meta, float metaCumprida) {
-		super(nome, questao, anotacoes, lembretes);
+			float meta, float metaCumprida, int id) {
+		super(nome, questao, anotacoes, lembretes, id);
 		this.unidade = unidade;
 		this.meta = meta;
 		this.metaCumprida = metaCumprida;

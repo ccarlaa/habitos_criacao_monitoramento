@@ -5,13 +5,15 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private boolean isOnline;
+	private int id;
 	
-	public Usuario(String nome, String email, String senha, boolean isOnline) {
+	public Usuario(String nome, String email, String senha, boolean isOnline, int id) {
 		super();
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.isOnline = isOnline;
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -44,6 +46,14 @@ public class Usuario {
 	
 	public void setOnline(boolean isOnline) {
 		this.isOnline = isOnline;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

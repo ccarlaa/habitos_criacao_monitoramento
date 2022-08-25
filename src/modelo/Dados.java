@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Arrays;
+
 public class Dados {
 	private Usuario[] usuarios = new Usuario[50];
 	private int qtdUsuario;
@@ -8,14 +10,12 @@ public class Dados {
 	private HabitoMensuravel[] habitoMensuravel = new HabitoMensuravel[50];
 	private int qtdHabitoMensuravel;
 	
-
 	public Usuario[] getUsuarios() {
 		return usuarios;
 	}
 	
-	public void setUsuarios(Usuario[] usuarios) {
-		this.usuarios = usuarios;
-		setQtdUsuario(getQtdUsuario() + 1);
+	public void setUsuarios(Usuario usuarios) {
+		this.usuarios[getQtdUsuario()] = usuarios;
 	}
 	
 	public int getQtdUsuario() {
@@ -58,6 +58,13 @@ public class Dados {
 	
 	public void setQtdHabitoMensuravel(int qtdHabitoMensuravel) {
 		this.qtdHabitoMensuravel = qtdHabitoMensuravel;
+	}
+
+	@Override
+	public String toString() {
+		return "Dados [usuarios=" + Arrays.toString(usuarios) + ", qtdUsuario=" + qtdUsuario + ", habitoSimNao="
+				+ Arrays.toString(habitoSimNao) + ", qtdHabitosSimNao=" + qtdHabitosSimNao + ", habitoMensuravel="
+				+ Arrays.toString(habitoMensuravel) + ", qtdHabitoMensuravel=" + qtdHabitoMensuravel + "]";
 	}
 	
 	
