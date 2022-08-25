@@ -1,10 +1,10 @@
 package modelo;
 
-public class Habito_sim_nao extends Habito {
+public class HabitoSimNao extends Habito {
 	private int frequenciaPrevista;
 	private int frequenciaCumprida;
 	
-	public Habito_sim_nao(String nome, String questao, String anotacoes, Lembrete[] lembretes, int frequenciaPrevista,
+	public HabitoSimNao(String nome, String questao, String anotacoes, Lembrete[] lembretes, int frequenciaPrevista,
 			int frequenciaCumprida) {
 		super(nome, questao, anotacoes, lembretes);
 		this.frequenciaPrevista = frequenciaPrevista;

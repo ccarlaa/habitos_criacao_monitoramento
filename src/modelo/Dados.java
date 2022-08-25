@@ -3,9 +3,9 @@ package modelo;
 public class Dados {
 	private Usuario[] usuarios = new Usuario[50];
 	private int qtdUsuario;
-	private Habito_sim_nao[] habitoSimNao = new Habito_sim_nao[50];
+	private HabitoSimNao[] habitoSimNao = new HabitoSimNao[50];
 	private int qtdHabitosSimNao;
-	private Habito_mensuravel[] habitoMensuravel = new Habito_mensuravel[50];
+	private HabitoMensuravel[] habitoMensuravel = new HabitoMensuravel[50];
 	private int qtdHabitoMensuravel;
 	
 
@@ -26,11 +26,11 @@ public class Dados {
 		this.qtdUsuario = qtdUsuario;
 	}
 	
-	public Habito_sim_nao[] getHabitoSimNao() {
+	public HabitoSimNao[] getHabitoSimNao() {
 		return habitoSimNao;
 	}
 	
-	public void setHabitoSimNao(Habito_sim_nao[] habitoSimNao) {
+	public void setHabitoSimNao(HabitoSimNao[] habitoSimNao) {
 		this.habitoSimNao = habitoSimNao;
 		setQtdHabitosSimNao(getQtdHabitosSimNao() + 1);
 	}
@@ -43,11 +43,11 @@ public class Dados {
 		this.qtdHabitosSimNao = qtdHabitosSimNao;
 	}
 	
-	public Habito_mensuravel[] getHabitoMensuravel() {
+	public HabitoMensuravel[] getHabitoMensuravel() {
 		return habitoMensuravel;
 	}
 	
-	public void setHabitoMensuravel(Habito_mensuravel[] habitoMensuravel) {
+	public void setHabitoMensuravel(HabitoMensuravel[] habitoMensuravel) {
 		this.habitoMensuravel = habitoMensuravel;
 		setQtdHabitoMensuravel(getQtdHabitoMensuravel() + 1);
 	}

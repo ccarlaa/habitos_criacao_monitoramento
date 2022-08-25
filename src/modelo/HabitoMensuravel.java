@@ -1,11 +1,11 @@
 package modelo;
 
-public class Habito_mensuravel extends Habito {
+public class HabitoMensuravel extends Habito {
 	private String unidade;
 	private float meta;
 	private float metaCumprida;
 	
-	public Habito_mensuravel(String nome, String questao, String anotacoes, Lembrete[] lembretes, String unidade,
+	public HabitoMensuravel(String nome, String questao, String anotacoes, Lembrete[] lembretes, String unidade,
 			float meta, float metaCumprida) {
 		super(nome, questao, anotacoes, lembretes);
 		this.unidade = unidade;
