@@ -4,6 +4,10 @@ import controle.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.*;
 
 public class TelaCriacaoConta implements ActionListener {
@@ -91,7 +95,6 @@ public class TelaCriacaoConta implements ActionListener {
 		container.setVisible(true);
 	}
 
-
 	public void actionPerformed(ActionEvent e) {
 		String nome = inputNome.getText();
 		String email = inputEmail.getText();
@@ -107,14 +110,11 @@ public class TelaCriacaoConta implements ActionListener {
 		if(src == botao) {
 			res = dados.criarUsuario(nome, email, stringSenha, stringSenhaRepetida);	
 		}
-		
 		if(!res.equals("")) {
 			JOptionPane.showMessageDialog(null, res, null, 
 					JOptionPane.ERROR_MESSAGE);
 		} else {
 			new TelaLogin();
 		}
-		
 	}
-	
 }
