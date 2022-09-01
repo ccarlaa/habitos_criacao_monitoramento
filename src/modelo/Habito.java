@@ -2,17 +2,17 @@ package modelo;
 
 public abstract class Habito {
 	public String nome;
-	public String questao;
 	public String anotacoes;
-	public Lembrete[] lembretes = new Lembrete[10] ;
+	public String[] horarios = new String[5] ;
+	public String[] dias = new String[7];
 	public int id;
-	
-	public Habito(String nome, String questao, String anotacoes, Lembrete[] lembretes, int id) {
+
+	public Habito(String nome, String anotacoes, String[] horarios, String[] dias, int id) {
 		super();
 		this.nome = nome;
-		this.questao = questao;
 		this.anotacoes = anotacoes;
-		this.lembretes = lembretes;
+		this.horarios = horarios;
+		this.dias = dias;
 		this.id = id;
 	}
 
@@ -24,14 +24,6 @@ public abstract class Habito {
 		this.nome = nome;
 	}
 	
-	public String getQuestao() {
-		return questao;
-	}
-	
-	public void setQuestao(String questao) {
-		this.questao = questao;
-	}
-	
 	public String getAnotacoes() {
 		return anotacoes;
 	}
@@ -39,13 +31,21 @@ public abstract class Habito {
 	public void setAnotacoes(String anotacoes) {
 		this.anotacoes = anotacoes;
 	}
-	
-	public Lembrete[] getLembretes() {
-		return lembretes;
+
+	public String[] getHorarios() {
+		return horarios;
 	}
-	
-	public void setLembretes(Lembrete[] lembretes) {
-		this.lembretes = lembretes;
+
+	public void setHorarios(String[] horarios) {
+		this.horarios = horarios;
+	}
+
+	public String[] getDias() {
+		return dias;
+	}
+
+	public void setDias(String[] dias) {
+		this.dias = dias;
 	}
 
 	public int getId() {
@@ -55,4 +55,5 @@ public abstract class Habito {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 }

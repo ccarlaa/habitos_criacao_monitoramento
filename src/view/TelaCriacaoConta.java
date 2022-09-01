@@ -4,9 +4,6 @@ import controle.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.*;
 

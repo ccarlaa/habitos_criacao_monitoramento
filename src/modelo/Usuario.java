@@ -13,7 +13,6 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.isOnline = isOnline;
-		this.id = id;
 	}
 
 	public String getNome() {

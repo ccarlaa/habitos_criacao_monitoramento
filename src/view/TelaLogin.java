@@ -77,20 +77,19 @@ public class TelaLogin implements ActionListener {
 		String res = "";
 		
 		if(src == botao) {
-			res = dados.logar(email, stringSenha);	
+			res = dados.logar(email, stringSenha);
 		}
 		if(!res.equals("")) {
 			JOptionPane.showMessageDialog(null, res, null, 
 					JOptionPane.ERROR_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "login bem sucessedido ");
+			new TelaListaHabitos(email, dados);
 		}
 	}
 	
-//	public static void main(String[] args) {
-//		 new TelaLogin();
-//
-//	}
-	
+	public static void main(String[] args) {
+		 new TelaLogin();
 
+	}
 }

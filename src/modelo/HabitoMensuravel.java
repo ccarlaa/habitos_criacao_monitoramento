@@ -1,40 +1,30 @@
 package modelo;
 
 public class HabitoMensuravel extends Habito {
-	private String unidade;
-	private float meta;
-	private float metaCumprida;
-	
-	public HabitoMensuravel(String nome, String questao, String anotacoes, Lembrete[] lembretes, String unidade,
-			float meta, float metaCumprida, int id) {
-		super(nome, questao, anotacoes, lembretes, id);
-		this.unidade = unidade;
+	private String meta;
+	private String minimo;
+
+	public HabitoMensuravel(String nome, String anotacoes, String[] horarios, String[] dias, int id, String meta,
+			String minimo) {
+		super(nome, anotacoes, horarios, dias, id);
 		this.meta = meta;
-		this.metaCumprida = metaCumprida;
+		this.minimo = minimo;
 	}
 
-	public String getUnidade() {
-		return unidade;
-	}
-	
-	public void setUnidade(String unidade) {
-		this.unidade = unidade;
-	}
-	
-	public float getMeta() {
+	public String getMeta() {
 		return meta;
 	}
 	
-	public void setMeta(float meta) {
+	public void setMeta(String meta) {
 		this.meta = meta;
 	}
-	
-	public float getMetaCumprida() {
-		return metaCumprida;
+
+	public String getMinimo() {
+		return minimo;
 	}
-	
-	public void setMetaCumprida(float metaCumprida) {
-		this.metaCumprida = metaCumprida;
+
+	public void setMinimo(String minimo) {
+		this.minimo = minimo;
 	}
 	
 }

@@ -47,9 +47,8 @@ public class Dados {
 		return habitoMensuravel;
 	}
 	
-	public void setHabitoMensuravel(HabitoMensuravel[] habitoMensuravel) {
-		this.habitoMensuravel = habitoMensuravel;
-		setQtdHabitoMensuravel(getQtdHabitoMensuravel() + 1);
+	public void setHabitoMensuravel(HabitoMensuravel habitoMensuravel) {
+		this.habitoMensuravel[getQtdHabitoMensuravel()] = habitoMensuravel;
 	}
 	
 	public int getQtdHabitoMensuravel() {
