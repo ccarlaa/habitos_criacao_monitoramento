@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 import controle.ControleDados;
+import controle.ControleHabitos;
+import controle.ControleUsuario;
+import modelo.HabitoMensuravel;
 
 public class TelaListaHabitos implements ActionListener{
 	private JList<String> listaHabitos;
@@ -20,13 +23,20 @@ public class TelaListaHabitos implements ActionListener{
 	private static JButton botao1;
 	private static JButton botao2;
 	private JLabel dia;
-	private static ControleDados dados;
+	private  ControleDados dados;
+	private  ControleHabitos dadosHabitos;
+	private  ControleUsuario dadosUsuario;
 	String emailUsuario;
 	
 	public TelaListaHabitos(String email,ControleDados d) {
+		dadosHabitos = new ControleHabitos();
+		dadosUsuario = new ControleUsuario();
 		dados = d;
 		emailUsuario = email;
 		
+		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
+		String[] listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
+
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("EEEEE");
 
@@ -34,11 +44,11 @@ public class TelaListaHabitos implements ActionListener{
 		dia = new JLabel(df.format(date));
 		botao1 = new JButton("Mensurável");
 		botao2 = new JButton("Sim ou Não");
-		listaHabitos = new JList<String>();
+		listaHabitos = new JList<String>(listaHabitosMensuraveisInfos);
 
 		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Hábitos");
-		container.setSize(500, 500);
+		container.setSize(500, 600);
 		container.setLocation(500, 300);
 		container.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		container.setLayout(null);
@@ -48,7 +58,7 @@ public class TelaListaHabitos implements ActionListener{
 		
 		listaHabitos.setBounds(10, 50, 300, 400);
 		
-		botao1.setBounds(330, 50,150, 40);
+		botao1.setBounds(330, 50, 150, 40);
 		botao2.setBounds(330, 100, 150, 40);
 		
 		container.add(dia);

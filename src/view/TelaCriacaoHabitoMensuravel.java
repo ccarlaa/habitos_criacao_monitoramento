@@ -151,9 +151,6 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 		
 		Object src = e.getSource();
 		
-		System.out.println(horario);
-		System.out.println(diaEscolhido);
-		
 		if(src == botaoAddLembrete) {
 			if(diaEscolhido != null && horarioSemMascara[0].matches("[0-9]{2}") && horarioSemMascara[1].matches("[0-9]{2}")) {
 				int horas = Integer.parseInt(horarioSemMascara[0]);

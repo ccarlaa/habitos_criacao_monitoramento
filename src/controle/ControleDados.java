@@ -4,12 +4,24 @@ import modelo.*;
 public class ControleDados {
 	private Dados dados = new Dados();
 	
+	public ControleDados() {
+		dados.popularBanco();
+	}
+	
 	public Usuario[] getUsuarios() {
 		return dados.getUsuarios();
 	}
 	
 	public int getQtdUsuarios() {
 		return dados.getQtdUsuario();
+	}
+	
+	public int qtdHabitosMensuraveis() {
+		return dados.getQtdHabitoMensuravel();
+	}
+	
+	public HabitoMensuravel[] getHabitosMensuraveis() {
+		return dados.getHabitoMensuravel();
 	}
 	
 	public String criarUsuario(String nome, String email, String senha, String senhaRepetida) {
@@ -29,7 +41,7 @@ public class ControleDados {
 			}
 		}
 		
-		Usuario usuario = new Usuario(nome, email, senha, false, dados.getQtdUsuario() + 1);
+		Usuario usuario = new Usuario(nome, email, senha, dados.getQtdUsuario() + 1);
 		dados.setUsuarios(usuario);
 		dados.setQtdUsuario(qtdUsuarios + 1);
 		
@@ -39,15 +51,23 @@ public class ControleDados {
 	public String logar(String email, String senha) {
 		String mensagem = "";
 		String senhaCadastrada = "";
-		System.out.println(dados.toString());
+		boolean emailExiste = false;
 		
+		for(int i = 0; i < dados.getQtdUsuario(); i++) {
+			if(dados.getUsuarios()[i].getEmail().equals(email)) {
+				emailExiste = true;
+			}
+		}
+		if(!emailExiste) {
+			return mensagem = "Email não encontrado";
+		}
 		for(int i = 0; i < dados.getQtdUsuario(); i++) {
 			if(dados.getUsuarios()[i].getEmail().equals(email)) {
 				senhaCadastrada = dados.getUsuarios()[i].getSenha();
 			}
 		}
-		if(senhaCadastrada.equals("")) {
-			return mensagem = "Conta não encontrada";
+		if(senha.equals("")) {
+			return mensagem = "Preencha todos os campos";
 		}
 		if(!senhaCadastrada.equals(senha)) {
 			return mensagem = "Não autorizado. Senha incorreta.";

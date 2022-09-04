@@ -3,8 +3,8 @@ package modelo;
 public abstract class Habito {
 	public String nome;
 	public String anotacoes;
-	public String[] horarios = new String[5] ;
-	public String[] dias = new String[7];
+	public String[] horarios = new String[10] ;
+	public String[] dias = new String[10];
 	public int id;
 
 	public Habito(String nome, String anotacoes, String[] horarios, String[] dias, int id) {

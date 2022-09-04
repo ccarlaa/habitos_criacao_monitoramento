@@ -7,12 +7,11 @@ public class Usuario {
 	private boolean isOnline;
 	private int id;
 	
-	public Usuario(String nome, String email, String senha, boolean isOnline, int id) {
+	public Usuario(String nome, String email, String senha, int id) {
 		super();
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.isOnline = isOnline;
 	}
 
 	public String getNome() {
@@ -37,14 +36,6 @@ public class Usuario {
 	
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
-	public boolean isOnline() {
-		return isOnline;
-	}
-	
-	public void setOnline(boolean isOnline) {
-		this.isOnline = isOnline;
 	}
 
 	public int getId() {
