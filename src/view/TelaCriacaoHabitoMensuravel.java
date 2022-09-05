@@ -29,8 +29,8 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 	private static ControleDados dados;
 	private JFormattedTextField inputHora;
 	private static ControleUsuario dadosUsuario;
+	private JComboBox<String> selecaoDias;
 	private JList<String> lembretes;
-	private JList<String> selecaoDias;
 	String[] dias = {
 		"segunda-feira",
 		"terça-feira",
@@ -41,7 +41,6 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 		"domingo"
 	};
 	String[] listaLembretes = new String[10];
-	String diaEscolhido;
 	int qtdLembretes = 0;
 	String[] diasEscolhidos = new String[10];
 	String[] horariosEscolhidos = new String[10];
@@ -53,19 +52,19 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 		
 		dadosUsuario = new ControleUsuario();
 		container = new JFrame("Cadastro");
-		botaoAddLembrete = new JButton("+ Horário");
+		botaoAddLembrete = new JButton("+ Lembrete");
 		adicionarHabito = new JButton("Adicionar hábito");
 		inputNome = new JTextField(10);
 		inputAnotacao = new JTextField(10);
 		inputMinimo = new JTextField(10);
 		inputMeta = new JTextField(10);
-		inserirLembrete = new JLabel("Adicionar horário:");
+		inserirLembrete = new JLabel("Adicionar lembrete:");
 		inserirNome = new JLabel("Nome:");
 		inserirAnotacao = new JLabel("Anotações:");
 		inserirUnidade = new JLabel("Mínimo:");
 		inserirMeta = new JLabel("Meta:");
 		lembretes = new JList<String>(listaLembretes);
-		selecaoDias = new JList<String>(dias);
+		selecaoDias = new JComboBox<>(dias);
 		
 		try {
 			inputHora = new JFormattedTextField(new MaskFormatter("## : ##"));
@@ -75,7 +74,7 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 		
 		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Cadastro");
-		container.setSize(500, 850);
+		container.setSize(500, 750);
 		container.setLocation(500, 300);
 		container.setLayout(null);
 		
@@ -106,11 +105,11 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 
 		inputHora.setBounds(100, 370, 110, 30);
 		
-		selecaoDias.setBounds(100, 410, 110, 120);
+		selecaoDias.setBounds(100, 410, 110, 30);
 		
-		lembretes.setBounds(100, 540, 300, 170);
+		lembretes.setBounds(100, 450, 300, 170);
 		
-		adicionarHabito.setBounds(100, 730, 300, 30);
+		adicionarHabito.setBounds(100, 660, 300, 30);
 		
 		container.add(botaoAddLembrete);
 		container.add(inputNome);
@@ -129,10 +128,15 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 		
 		botaoAddLembrete.addActionListener(this);
 		adicionarHabito.addActionListener(this);
-		selecaoDias.addListSelectionListener(new ListSelectionListener() {
+		selecaoDias.addActionListener(this);
+		lembretes.addListSelectionListener(new ListSelectionListener() {
 		    @Override
 		    public void valueChanged(ListSelectionEvent e) {
-		    	diaEscolhido = selecaoDias.getSelectedValue();
+				Object src = e.getSource();
+
+				if(e.getValueIsAdjusting() && src == lembretes) {
+					int index = lembretes.getSelectedIndex();
+				}
 		    }
 		});
 		
@@ -148,10 +152,12 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 		String[] horarioSemMascara = horario.split(" : ");
 		boolean lembreteExiste = false;
 		String mensagem = "";
+		String diaEscolhido = null;
 		
 		Object src = e.getSource();
 		
 		if(src == botaoAddLembrete) {
+			diaEscolhido = selecaoDias.getItemAt(selecaoDias.getSelectedIndex());
 			if(diaEscolhido != null && horarioSemMascara[0].matches("[0-9]{2}") && horarioSemMascara[1].matches("[0-9]{2}")) {
 				int horas = Integer.parseInt(horarioSemMascara[0]);
 				int minutos = Integer.parseInt(horarioSemMascara[1]);
@@ -214,7 +220,8 @@ public class TelaCriacaoHabitoMensuravel implements ActionListener {
 			);
 			if(!mensagem.equals("")) {
 				JOptionPane.showMessageDialog(null, mensagem);
-				
+			} else {
+				new TelaListaHabitos(emailUsuario, dados);
 			}
 		}
 	}

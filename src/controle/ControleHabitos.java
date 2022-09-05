@@ -31,4 +31,30 @@ public class ControleHabitos {
 		
 		return habitos;
 	}
+	
+	public String[] getHabitosSimNao(ControleDados dados, int usuarioId) {
+		int qtdHabitos = 0;
+		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
+			if(dados.getHabitosSimNao()[i].getId() == usuarioId) {
+				qtdHabitos++;
+			}
+		}
+		
+		Date date = new Date();
+		DateFormat df = new SimpleDateFormat("EEEEE");
+		String dia = df.format(date);
+		String[] habitos = new String[qtdHabitos];
+		int tamanhoLista = 0;
+		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
+			if(dados.getHabitosSimNao()[i].getId() == usuarioId ) {
+				List<String> lista = Arrays.asList(dados.getHabitosSimNao()[i].getDias());
+				if(lista.contains(dia)) {
+					habitos[tamanhoLista] = dados.getHabitosSimNao()[i].getNome();
+					tamanhoLista++;
+				}
+			}
+		}
+		
+		return habitos;
+	}
 }

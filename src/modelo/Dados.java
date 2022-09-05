@@ -39,9 +39,8 @@ public class Dados {
 		return habitoSimNao;
 	}
 	
-	public void setHabitoSimNao(HabitoSimNao[] habitoSimNao) {
-		this.habitoSimNao = habitoSimNao;
-		setQtdHabitosSimNao(getQtdHabitosSimNao() + 1);
+	public void setHabitoSimNao(HabitoSimNao habitoSimNao) {
+		this.habitoSimNao[getQtdHabitosSimNao()] = habitoSimNao;
 	}
 	
 	public int getQtdHabitosSimNao() {

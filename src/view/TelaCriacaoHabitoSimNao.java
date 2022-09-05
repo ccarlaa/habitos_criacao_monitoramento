@@ -7,16 +7,14 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.text.MaskFormatter;
-
 import controle.ControleDados;
 import controle.ControleUsuario;
 
@@ -35,7 +33,7 @@ public class TelaCriacaoHabitoSimNao implements ActionListener {
 	private JFormattedTextField inputHora;
 	private static ControleUsuario dadosUsuario;
 	private JList<String> lembretes;
-	private JList<String> selecaoDias;
+	private JComboBox<String> selecaoDias;
 	String[] dias = {
 		"segunda-feira",
 		"terça-feira",
@@ -58,17 +56,17 @@ public class TelaCriacaoHabitoSimNao implements ActionListener {
 		
 		dadosUsuario = new ControleUsuario();
 		container = new JFrame("Cadastro");
-		botaoAddLembrete = new JButton("+ Horário");
+		botaoAddLembrete = new JButton("+ Lembrete");
 		adicionarHabito = new JButton("Adicionar hábito");
 		inputNome = new JTextField(10);
 		inputAnotacao = new JTextField(10);
 		inputFrequencia = new JTextField(10);
-		inserirLembrete = new JLabel("Adicionar horário:");
+		inserirLembrete = new JLabel("Adicionar lembrete:");
 		inserirNome = new JLabel("Nome:");
 		inserirAnotacao = new JLabel("Anotações:");
 		inserirFrequencia = new JLabel("Frequência:");
 		lembretes = new JList<String>(listaLembretes);
-		selecaoDias = new JList<String>(dias);
+		selecaoDias = new JComboBox<>(dias);
 		
 		try {
 			inputHora = new JFormattedTextField(new MaskFormatter("## : ##"));
@@ -78,7 +76,7 @@ public class TelaCriacaoHabitoSimNao implements ActionListener {
 		
 		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Cadastro");
-		container.setSize(500, 800);
+		container.setSize(500, 700);
 		container.setLocation(500, 300);
 		container.setLayout(null);
 		
@@ -104,11 +102,11 @@ public class TelaCriacaoHabitoSimNao implements ActionListener {
 
 		inputHora.setBounds(100, 290, 110, 30);
 		
-		selecaoDias.setBounds(100, 330, 110, 120);
+		selecaoDias.setBounds(100, 330, 110, 30);
 		
-		lembretes.setBounds(100, 470, 300, 170);
+		lembretes.setBounds(100, 380, 300, 170);
 		
-		adicionarHabito.setBounds(100, 660, 300, 30);
+		adicionarHabito.setBounds(100, 600, 300, 30);
 		
 		container.add(botaoAddLembrete);
 		container.add(inputNome);
@@ -125,12 +123,7 @@ public class TelaCriacaoHabitoSimNao implements ActionListener {
 		
 		botaoAddLembrete.addActionListener(this);
 		adicionarHabito.addActionListener(this);
-		selecaoDias.addListSelectionListener(new ListSelectionListener() {
-		    @Override
-		    public void valueChanged(ListSelectionEvent e) {
-		    	diaEscolhido = selecaoDias.getSelectedValue();
-		    }
-		});
+		selecaoDias.addActionListener(this);
 		
 		container.setVisible(true);
 	}
@@ -147,6 +140,7 @@ public class TelaCriacaoHabitoSimNao implements ActionListener {
 		Object src = e.getSource();
 		
 		if(src == botaoAddLembrete) {
+			diaEscolhido = selecaoDias.getItemAt(selecaoDias.getSelectedIndex());
 			if(diaEscolhido != null && horarioSemMascara[0].matches("[0-9]{2}") && horarioSemMascara[1].matches("[0-9]{2}")) {
 				int horas = Integer.parseInt(horarioSemMascara[0]);
 				int minutos = Integer.parseInt(horarioSemMascara[1]);
@@ -198,17 +192,18 @@ public class TelaCriacaoHabitoSimNao implements ActionListener {
 		}
 		if(src == adicionarHabito) {
 			int usuarioId = dadosUsuario.getIdUsuario(emailUsuario, dados);
-//			mensagem = dados.salvarHabitoMensuravel(
-//				usuarioId,
-//				nome, 
-//				frequencia, 
-//				anotacao, 
-//				horariosEscolhidos, 
-//				diasEscolhidos
-//			);
+			mensagem = dados.salvarHabitoSimNao(
+				usuarioId,
+				nome, 
+				frequencia, 
+				anotacao, 
+				horariosEscolhidos, 
+				diasEscolhidos
+			);
 			if(!mensagem.equals("")) {
 				JOptionPane.showMessageDialog(null, mensagem);
-				
+			} else {
+				new TelaListaHabitos(emailUsuario, dados);
 			}
 		}
 	}

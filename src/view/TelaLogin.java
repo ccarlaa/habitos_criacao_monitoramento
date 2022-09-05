@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TelaLogin extends JFrame implements ActionListener{
+public class TelaLogin implements ActionListener{
 	private static JFrame container;
 	private static JButton botao;
 	private static JTextField inputEmail;
@@ -20,7 +20,7 @@ public class TelaLogin extends JFrame implements ActionListener{
 		dados = d;
 		
 		container = new JFrame("Cadastro");
-		botao = new JButton("Cadastrar");
+		botao = new JButton("Logar");
 		inputEmail = new JTextField(10);
 		inputSenha = new JPasswordField(10);
 		inserirEmail = new JLabel("Insira seu email:");
@@ -76,11 +76,6 @@ public class TelaLogin extends JFrame implements ActionListener{
 		
 		Object src = e.getSource();
 		String res = "";
-		
-		if(src == criarConta) {
-			System.out.println("hey");
-			this.dispose();
-		}
 		
 		if(src == botao) {
 			res = dados.logar(email, stringSenha);

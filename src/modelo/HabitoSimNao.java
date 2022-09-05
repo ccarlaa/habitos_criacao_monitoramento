@@ -1,19 +1,19 @@
 package modelo;
 
 public class HabitoSimNao extends Habito {
-	private int frequenciaPrevista;
+	private String frequenciaPrevista;
 
 	public HabitoSimNao(String nome, String anotacoes, String[] horarios, String[] dias, int id,
-			int frequenciaPrevista) {
+			String frequenciaPrevista) {
 		super(nome, anotacoes, horarios, dias, id);
 		this.frequenciaPrevista = frequenciaPrevista;
 	}
 
-	public int getFrequenciaPrevista() {
+	public String getFrequenciaPrevista() {
 		return frequenciaPrevista;
 	}
 	
-	public void setFrequenciaPrevista(int frequenciaPrevista) {
+	public void setFrequenciaPrevista(String frequenciaPrevista) {
 		this.frequenciaPrevista = frequenciaPrevista;
 	}
 

@@ -4,7 +4,6 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private boolean isOnline;
 	private int id;
 	
 	public Usuario(String nome, String email, String senha, int id) {

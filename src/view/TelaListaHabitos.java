@@ -15,7 +15,6 @@ import javax.swing.JList;
 import controle.ControleDados;
 import controle.ControleHabitos;
 import controle.ControleUsuario;
-import modelo.HabitoMensuravel;
 
 public class TelaListaHabitos implements ActionListener {
 	private JList<String> listaHabitosMensuraveis;
@@ -39,18 +38,19 @@ public class TelaListaHabitos implements ActionListener {
 		
 		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
 		String[] listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
+		String[] listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNao(dados, usuarioId);
 
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("EEEEE");
 
 		container = new JFrame("Hábitos");
-		dia = new JLabel(df.format(date));
+		dia = new JLabel("Hoje é " + df.format(date));
 		habitosMensuraveis = new JLabel("Hábitos Mensuráveis:");
 		habitosSimNao = new JLabel("Hábitos Sim Não:");
 		botao1 = new JButton("Mensurável");
 		botao2 = new JButton("Sim ou Não");
 		listaHabitosMensuraveis = new JList<String>(listaHabitosMensuraveisInfos);
-		listaHabitosSimNao = new JList<String>();
+		listaHabitosSimNao = new JList<String>(listaHabitosSimNaoInfos);
 
 		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Hábitos");

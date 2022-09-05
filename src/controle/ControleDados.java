@@ -24,6 +24,14 @@ public class ControleDados {
 		return dados.getHabitoMensuravel();
 	}
 	
+	public int qtdHabitosSimNao() {
+		return dados.getQtdHabitosSimNao();
+	}
+	
+	public HabitoSimNao[] getHabitosSimNao() {
+		return dados.getHabitoSimNao();
+	}
+	
 	public String criarUsuario(String nome, String email, String senha, String senhaRepetida) {
 		String mensagem = "";
 		int qtdUsuarios = dados.getQtdUsuario();
@@ -93,7 +101,7 @@ public class ControleDados {
 		}
 		for(int i = 0; i < qtdHabitosMensuraveis; i++) {
 			if(dados.getHabitoMensuravel()[i].getNome().equals(nome)) {
-				return mensagem = "Já existe um hábito com esse nome";
+				return mensagem = "Já existe um hábito mensurável com esse nome";
 			}
 		}
 		
@@ -105,5 +113,31 @@ public class ControleDados {
 		return mensagem;
 	}
 	
-	
+	public String salvarHabitoSimNao(
+			int id,
+			String nome,
+			String frequencia,
+			String anotacoes,
+			String[] horarios,
+			String[] dias
+		) {
+			String mensagem = "";
+			int qtdHabitosSimNao = dados.getQtdHabitosSimNao();
+			
+			if(nome == null || frequencia == null || horarios[0] == null) {
+				return mensagem = "Preencha todos os campos";
+			}
+			for(int i = 0; i < qtdHabitosSimNao; i++) {
+				if(dados.getHabitoSimNao()[i].getNome().equals(nome)) {
+					return mensagem = "Já existe um hábito sim não com esse nome";
+				}
+			}
+			
+			HabitoSimNao habito = new HabitoSimNao(nome, anotacoes, horarios, dias, id, frequencia);
+			dados.setHabitoSimNao(habito);
+			dados.setQtdHabitosSimNao(qtdHabitosSimNao + 1);
+			
+			System.out.println(dados.toString());
+			return mensagem;
+		}
 }
