@@ -17,12 +17,15 @@ import controle.ControleHabitos;
 import controle.ControleUsuario;
 import modelo.HabitoMensuravel;
 
-public class TelaListaHabitos implements ActionListener{
-	private JList<String> listaHabitos;
+public class TelaListaHabitos implements ActionListener {
+	private JList<String> listaHabitosMensuraveis;
+	private JList<String> listaHabitosSimNao;
 	private static JFrame container;
 	private static JButton botao1;
 	private static JButton botao2;
 	private JLabel dia;
+	private JLabel habitosMensuraveis;
+	private JLabel habitosSimNao;
 	private  ControleDados dados;
 	private  ControleHabitos dadosHabitos;
 	private  ControleUsuario dadosUsuario;
@@ -42,9 +45,12 @@ public class TelaListaHabitos implements ActionListener{
 
 		container = new JFrame("Hábitos");
 		dia = new JLabel(df.format(date));
+		habitosMensuraveis = new JLabel("Hábitos Mensuráveis:");
+		habitosSimNao = new JLabel("Hábitos Sim Não:");
 		botao1 = new JButton("Mensurável");
 		botao2 = new JButton("Sim ou Não");
-		listaHabitos = new JList<String>(listaHabitosMensuraveisInfos);
+		listaHabitosMensuraveis = new JList<String>(listaHabitosMensuraveisInfos);
+		listaHabitosSimNao = new JList<String>();
 
 		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Hábitos");
@@ -56,13 +62,23 @@ public class TelaListaHabitos implements ActionListener{
 		dia.setFont(new Font("Arial", Font.BOLD, 20));
 		dia.setBounds(10, 10, 300, 30);
 		
-		listaHabitos.setBounds(10, 50, 300, 400);
+		habitosMensuraveis.setBounds(10,60,200,30);
+		habitosMensuraveis.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		botao1.setBounds(330, 50, 150, 40);
-		botao2.setBounds(330, 100, 150, 40);
+		habitosSimNao.setBounds(10,315,200,30);
+		habitosSimNao.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		listaHabitosMensuraveis.setBounds(10, 100, 300, 200);
+		listaHabitosSimNao.setBounds(10, 350, 300, 200);
+		
+		botao1.setBounds(330, 100, 150, 40);
+		botao2.setBounds(330, 350, 150, 40);
 		
 		container.add(dia);
-		container.add(listaHabitos);
+		container.add(habitosMensuraveis);
+		container.add(habitosSimNao);
+		container.add(listaHabitosMensuraveis);
+		container.add(listaHabitosSimNao);
 		container.add(botao1);
 		container.add(botao2);
 		
@@ -77,6 +93,10 @@ public class TelaListaHabitos implements ActionListener{
 		
 		if(src == botao1) {
 			new TelaCriacaoHabitoMensuravel(emailUsuario, dados);
+		}
+		
+		if(src == botao2) {
+			new TelaCriacaoHabitoSimNao(emailUsuario, dados);
 		}
 	}
 }

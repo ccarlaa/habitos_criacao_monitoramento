@@ -18,11 +18,10 @@ public class TelaCriacaoConta implements ActionListener {
 	private static JLabel inserirSenha;
 	private static JLabel inserirEmail;
 	private static JLabel inserirSenhaNovamente;
-	private static ControleDados dados;
 	private static JLabel login;
+	private static ControleDados dados = new ControleDados();
 	
-	public TelaCriacaoConta(ControleDados d) {
-		dados = d;
+	public TelaCriacaoConta() {
 		
 		container = new JFrame("Cadastro");
 		botao = new JButton("Cadastrar");
@@ -84,7 +83,7 @@ public class TelaCriacaoConta implements ActionListener {
 		login.addMouseListener(new MouseAdapter() {
 		      @Override
 		      public void mouseClicked(MouseEvent e) {
-		    	  new TelaLogin(); 
+		    	  new TelaLogin(dados); 
 		      }
 		    }
 		);
@@ -111,7 +110,11 @@ public class TelaCriacaoConta implements ActionListener {
 			JOptionPane.showMessageDialog(null, res, null, 
 					JOptionPane.ERROR_MESSAGE);
 		} else {
-			new TelaLogin();
+			new TelaLogin(dados);
 		}
+	}
+	
+	public static void main(String[] args) {
+		 new TelaCriacaoConta();
 	}
 }

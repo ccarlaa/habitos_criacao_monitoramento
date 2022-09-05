@@ -6,17 +6,19 @@ import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TelaLogin implements ActionListener {
+public class TelaLogin extends JFrame implements ActionListener{
 	private static JFrame container;
 	private static JButton botao;
 	private static JTextField inputEmail;
 	private static JPasswordField inputSenha;
 	private static JLabel inserirSenha;
 	private static JLabel inserirEmail;
-	private static ControleDados dados = new ControleDados();
 	private static JLabel criarConta;
+	private static ControleDados dados;
 	
-	public TelaLogin() {
+	public TelaLogin(ControleDados d) {
+		dados = d;
+		
 		container = new JFrame("Cadastro");
 		botao = new JButton("Cadastrar");
 		inputEmail = new JTextField(10);
@@ -61,12 +63,11 @@ public class TelaLogin implements ActionListener {
 		criarConta.addMouseListener(new MouseAdapter() {
 		      @Override
 		      public void mouseClicked(MouseEvent e) {
-		    	  new TelaCriacaoConta(dados); 
+		    	  new TelaCriacaoConta(); 
 		      }
 		    }
 		);
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		String email = inputEmail.getText();
 		char[] senha = inputSenha.getPassword();
@@ -75,6 +76,11 @@ public class TelaLogin implements ActionListener {
 		
 		Object src = e.getSource();
 		String res = "";
+		
+		if(src == criarConta) {
+			System.out.println("hey");
+			this.dispose();
+		}
 		
 		if(src == botao) {
 			res = dados.logar(email, stringSenha);
@@ -88,8 +94,4 @@ public class TelaLogin implements ActionListener {
 		}
 	}
 	
-	public static void main(String[] args) {
-		 new TelaLogin();
-
-	}
 }
