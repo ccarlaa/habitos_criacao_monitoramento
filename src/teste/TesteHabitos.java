@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import controle.ControleHabitos;
 
-class TesteHabitos {
+public class TesteHabitos {
 	ControleHabitos controleHabitos = new ControleHabitos();
 
 	@Test
-	void getHabitosMensuravei() {
+	public void getHabitosMensuravei() {
 		assertTrue(controleHabitos.equals(controleHabitos));
 	}
 
