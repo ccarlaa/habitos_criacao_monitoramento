@@ -57,4 +57,25 @@ public class ControleHabitos {
 		
 		return habitos;
 	}
+	
+	public int getIndexHabitoMensuravel(ControleDados dados, int usuarioId, String nome) {
+		int index = -1;
+		for(int i = 0; i < dados.qtdHabitosMensuraveis(); i ++) {
+			if(dados.getHabitosMensuraveis()[i].getNome().equals(nome) && 
+					dados.getHabitosMensuraveis()[i].getId() == usuarioId) {
+				index = i;
+			}
+		}
+		return index;
+	}
+	
+	public String[] getLembretes(ControleDados dados, int index) {
+		String[] dias = dados.getHabitosMensuraveis()[index].getDias();
+		String[] horarios = dados.getHabitosMensuraveis()[index].getHorarios();
+		String[] lembretes = new String[dias.length];
+		for(int i = 0; i < dias.length; i++) {
+			lembretes[i] = dias[i] + " - " + horarios[i];
+		}
+		return lembretes;
+	}
 }

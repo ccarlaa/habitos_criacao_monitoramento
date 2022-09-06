@@ -96,7 +96,7 @@ public class ControleDados {
 		String mensagem = "";
 		int qtdHabitosMensuraveis = dados.getQtdHabitoMensuravel();
 		
-		if(nome == null || meta == null || minimo == null || horarios[0] == null) {
+		if(nome.equals("") || meta.equals("") || minimo.equals("") || horarios[0] == null) {
 			return mensagem = "Preencha todos os campos";
 		}
 		for(int i = 0; i < qtdHabitosMensuraveis; i++) {
@@ -124,7 +124,7 @@ public class ControleDados {
 			String mensagem = "";
 			int qtdHabitosSimNao = dados.getQtdHabitosSimNao();
 			
-			if(nome == null || frequencia == null || horarios[0] == null) {
+			if(nome.equals("") || anotacoes.equals("") || frequencia.equals("") || horarios[0] == null) {
 				return mensagem = "Preencha todos os campos";
 			}
 			for(int i = 0; i < qtdHabitosSimNao; i++) {

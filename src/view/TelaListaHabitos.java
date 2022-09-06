@@ -1,4 +1,5 @@
 package view;
+import controle.*;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,12 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controle.ControleDados;
 import controle.ControleHabitos;
 import controle.ControleUsuario;
 
-public class TelaListaHabitos implements ActionListener {
+public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 	private JList<String> listaHabitosMensuraveis;
 	private JList<String> listaHabitosSimNao;
 	private static JFrame container;
@@ -28,6 +31,8 @@ public class TelaListaHabitos implements ActionListener {
 	private  ControleDados dados;
 	private  ControleHabitos dadosHabitos;
 	private  ControleUsuario dadosUsuario;
+	private String[] listaHabitosMensuraveisInfos;
+	private String[] listaHabitosSimNaoInfos;
 	String emailUsuario;
 	
 	public TelaListaHabitos(String email,ControleDados d) {
@@ -37,8 +42,8 @@ public class TelaListaHabitos implements ActionListener {
 		emailUsuario = email;
 		
 		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
-		String[] listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
-		String[] listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNao(dados, usuarioId);
+		listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
+		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNao(dados, usuarioId);
 
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("EEEEE");
@@ -86,17 +91,30 @@ public class TelaListaHabitos implements ActionListener {
 		
 		botao1.addActionListener(this);
 		botao2.addActionListener(this);
+		listaHabitosMensuraveis.addListSelectionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		
 		if(src == botao1) {
-			new TelaCriacaoHabitoMensuravel(emailUsuario, dados);
+			new TelaHabitoMensuravel(emailUsuario, dados, -1, false);
 		}
 		
 		if(src == botao2) {
-			new TelaCriacaoHabitoSimNao(emailUsuario, dados);
+			new TelaHabitoSimNao(emailUsuario, dados);
+		}
+	}
+	
+	public void valueChanged(ListSelectionEvent e) {
+		Object src = e.getSource();
+		int usuarioId = dadosUsuario.getIdUsuario(emailUsuario, dados);
+
+		if(e.getValueIsAdjusting() && src == listaHabitosMensuraveis) {
+			int index = listaHabitosMensuraveis.getSelectedIndex();
+			String nomeHabito = listaHabitosMensuraveisInfos[index];
+			int indexDados = dadosHabitos.getIndexHabitoMensuravel(dados, usuarioId, nomeHabito);
+			new TelaHabitoMensuravel(emailUsuario, dados, index, true);
 		}
 	}
 }
