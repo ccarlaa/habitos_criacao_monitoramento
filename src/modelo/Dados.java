@@ -6,7 +6,7 @@ public class Dados {
 	private Usuario[] usuarios = new Usuario[50];
 	private int qtdUsuario = 1;
 	private HabitoSimNao[] habitoSimNao = new HabitoSimNao[50];
-	private int qtdHabitosSimNao;
+	private int qtdHabitosSimNao = 4;
 	private HabitoMensuravel[] habitoMensuravel = new HabitoMensuravel[50];
 	private int qtdHabitoMensuravel = 4;
 	
@@ -16,6 +16,9 @@ public class Dados {
 		usuarios[0] = new Usuario("teste", "teste@gmail.com", "1234", 0);
 		for(int i = 0; i < 5; i++) {
 			habitoMensuravel[i] = new HabitoMensuravel("correr" + i, "levar água", horarios, dias, 0, "10km", "8km" );
+		}
+		for(int i = 0; i < 5; i++) {
+			habitoSimNao[i] = new HabitoSimNao("beber agua" + i, "levar água", horarios, dias, 0, "2 vezes por dia" );
 		}
 	}
 	
@@ -39,8 +42,8 @@ public class Dados {
 		return habitoSimNao;
 	}
 	
-	public void setHabitoSimNao(HabitoSimNao habitoSimNao) {
-		this.habitoSimNao[getQtdHabitosSimNao()] = habitoSimNao;
+	public void setHabitoSimNao(HabitoSimNao habitoSimNao, int index) {
+		this.habitoSimNao[index] = habitoSimNao;
 	}
 	
 	public int getQtdHabitosSimNao() {

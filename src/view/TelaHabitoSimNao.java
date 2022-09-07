@@ -14,14 +14,18 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.text.MaskFormatter;
 import controle.ControleDados;
+import controle.ControleHabitos;
 import controle.ControleUsuario;
 
 public class TelaHabitoSimNao implements ActionListener {
 	private static JFrame container;
 	private static JButton botaoAddLembrete;
 	private static JButton adicionarHabito;
+	private static JButton updateHabito;
 	private static JTextField inputFrequencia;
 	private static JTextField inputAnotacao;
 	private static JTextField inputNome;
@@ -32,6 +36,9 @@ public class TelaHabitoSimNao implements ActionListener {
 	private static ControleDados dados;
 	private JFormattedTextField inputHora;
 	private static ControleUsuario dadosUsuario;
+	private static ControleHabitos dadosHabitos;
+	private static JButton deletarLembrete;
+	private static JButton deletarHabito;
 	private JList<String> lembretes;
 	private JComboBox<String> selecaoDias;
 	String[] dias = {
@@ -49,24 +56,62 @@ public class TelaHabitoSimNao implements ActionListener {
 	String[] diasEscolhidos = new String[10];
 	String[] horariosEscolhidos = new String[10];
 	String emailUsuario;
+	int index;
+	int indexLembrete = -1;
 	
-	public TelaHabitoSimNao(String email, ControleDados d ) {
+	public TelaHabitoSimNao(String email, ControleDados d, int idx, boolean editar) {
 		dados = d;
 		emailUsuario = email;
+		index = idx;
 		
 		dadosUsuario = new ControleUsuario();
+		dadosHabitos = new ControleHabitos();
 		container = new JFrame("Cadastro");
 		botaoAddLembrete = new JButton("+ Lembrete");
+		deletarLembrete = new JButton("- Lembrete");
 		adicionarHabito = new JButton("Adicionar hábito");
-		inputNome = new JTextField(10);
-		inputAnotacao = new JTextField(10);
-		inputFrequencia = new JTextField(10);
 		inserirLembrete = new JLabel("Adicionar lembrete:");
 		inserirNome = new JLabel("Nome:");
 		inserirAnotacao = new JLabel("Anotações:");
 		inserirFrequencia = new JLabel("Frequência:");
 		lembretes = new JList<String>(listaLembretes);
 		selecaoDias = new JComboBox<>(dias);
+		
+		if(editar) {
+			inputNome = new JTextField(dados.getHabitosSimNao()[index].getNome());
+			inputAnotacao = new JTextField(dados.getHabitosSimNao()[index].getAnotacoes());
+			inputFrequencia = new JTextField(dados.getHabitosSimNao()[index].getFrequenciaPrevista());
+			updateHabito = new JButton("Editar hábito");
+			deletarHabito = new JButton("Deletar hábito");
+			String[] listaLembretesCriados = dadosHabitos.getLembretesHabitosSimNao(dados, index);
+			
+			for(int i = 0; i < listaLembretesCriados.length; i++) {
+				listaLembretes[i] = listaLembretesCriados[i];
+			}
+			
+			qtdLembretes = listaLembretesCriados.length;
+			
+			updateHabito.setBounds(100, 590, 300, 30);
+			deletarHabito.setBounds(100, 630, 300, 30);
+			
+			container.add(deletarHabito);
+			container.add(updateHabito);
+			
+			deletarHabito.addActionListener(this);
+			updateHabito.addActionListener(this);
+		} else {
+			inputNome = new JTextField(10);
+			inputAnotacao = new JTextField(10);
+			inputFrequencia = new JTextField(10);
+			lembretes = new JList<String>(listaLembretes);
+			adicionarHabito = new JButton("Adicionar hábito");
+			
+			adicionarHabito.setBounds(100, 660, 300, 30);
+			
+			container.add(adicionarHabito);
+			
+			adicionarHabito.addActionListener(this);
+		}
 		
 		try {
 			inputHora = new JFormattedTextField(new MaskFormatter("## : ##"));
@@ -76,7 +121,7 @@ public class TelaHabitoSimNao implements ActionListener {
 		
 		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Cadastro");
-		container.setSize(500, 700);
+		container.setSize(500, 750);
 		container.setLocation(500, 300);
 		container.setLayout(null);
 		
@@ -99,6 +144,8 @@ public class TelaHabitoSimNao implements ActionListener {
 		inserirLembrete.setBounds(100, 250, 300, 30);
 		
 		botaoAddLembrete.setBounds(280,290,120,30);
+		
+		deletarLembrete.setBounds(280,330,120,30);
 
 		inputHora.setBounds(100, 290, 50, 30);
 		
@@ -119,11 +166,21 @@ public class TelaHabitoSimNao implements ActionListener {
 		container.add(selecaoDias);
 		container.add(inputHora);
 		container.add(lembretes);
-		container.add(adicionarHabito);
+		container.add(deletarLembrete);
 		
 		botaoAddLembrete.addActionListener(this);
-		adicionarHabito.addActionListener(this);
 		selecaoDias.addActionListener(this);
+		deletarLembrete.addActionListener(this);
+		lembretes.addListSelectionListener(new ListSelectionListener() {
+		    @Override
+		    public void valueChanged(ListSelectionEvent e) {
+				Object src = e.getSource();
+
+				if(e.getValueIsAdjusting() && src == lembretes) {
+					indexLembrete = lembretes.getSelectedIndex();
+				}
+		    }
+		});
 		
 		container.setVisible(true);
 	}
@@ -136,6 +193,7 @@ public class TelaHabitoSimNao implements ActionListener {
 		String[] horarioSemMascara = horario.split(" : ");
 		boolean lembreteExiste = false;
 		String mensagem = "";
+		int usuarioId = dadosUsuario.getIdUsuario(emailUsuario, dados);
 		
 		Object src = e.getSource();
 		
@@ -195,7 +253,6 @@ public class TelaHabitoSimNao implements ActionListener {
 		};
 		
 		if(src == adicionarHabito) {
-			int usuarioId = dadosUsuario.getIdUsuario(emailUsuario, dados);
 			mensagem = dados.salvarHabitoSimNao(
 				usuarioId,
 				nome, 
@@ -208,6 +265,52 @@ public class TelaHabitoSimNao implements ActionListener {
 				JOptionPane.showMessageDialog(null, mensagem);
 			} else {
 				new TelaListaHabitos(emailUsuario, dados);
+			}
+		}
+		
+		if(src == updateHabito) {
+			String[] horariosEscolhidos = new String[10];
+			String[] diasEscolhidos = new String[10];
+			
+			for(int i = 0; i < qtdLembretes; i++) {
+				if(listaLembretes[i] != null) {
+					String[] lembreteFiltrado = listaLembretes[i].split(" - ");
+					horariosEscolhidos[i] = lembreteFiltrado[1];
+					diasEscolhidos[i] = lembreteFiltrado[0];
+				}
+			}
+			
+			mensagem = dadosHabitos.updateHabitosSimNao(
+				dados,
+				index,
+				usuarioId,
+				nome, 
+				frequencia, 
+				anotacao, 
+				horariosEscolhidos, 
+				diasEscolhidos
+			);
+			if(!mensagem.equals("")) {
+				JOptionPane.showMessageDialog(null, mensagem);
+			} else {
+				new TelaListaHabitos(emailUsuario, dados);
+			}
+		}
+		
+		if(src == deletarHabito) {
+			dadosHabitos.deletarHabitoSimNao(dados, index);
+			JOptionPane.showMessageDialog(null, "Hábito deletado");
+			new TelaListaHabitos(emailUsuario, dados);
+		}
+		
+		if(src == deletarLembrete) {
+			if(indexLembrete == -1) {
+				JOptionPane.showMessageDialog(null, "Escolha um lembrete para deletar.", null, 
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				qtdLembretes = qtdLembretes - 1;
+				listaLembretes[indexLembrete] = null;
+				lembretes.updateUI();
 			}
 		}
 	}

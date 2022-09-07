@@ -43,7 +43,7 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		
 		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
 		listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
-		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNao(dados, usuarioId);
+		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNaoFiltrado(dados, usuarioId);
 
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("EEEEE");
@@ -92,6 +92,7 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		botao1.addActionListener(this);
 		botao2.addActionListener(this);
 		listaHabitosMensuraveis.addListSelectionListener(this);
+		listaHabitosSimNao.addListSelectionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -102,19 +103,21 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		}
 		
 		if(src == botao2) {
-			new TelaHabitoSimNao(emailUsuario, dados);
+			new TelaHabitoSimNao(emailUsuario, dados, -1, false);
 		}
 	}
 	
 	public void valueChanged(ListSelectionEvent e) {
 		Object src = e.getSource();
-		int usuarioId = dadosUsuario.getIdUsuario(emailUsuario, dados);
 
 		if(e.getValueIsAdjusting() && src == listaHabitosMensuraveis) {
 			int index = listaHabitosMensuraveis.getSelectedIndex();
-			String nomeHabito = listaHabitosMensuraveisInfos[index];
-			int indexDados = dadosHabitos.getIndexHabitoMensuravel(dados, usuarioId, nomeHabito);
 			new TelaHabitoMensuravel(emailUsuario, dados, index, true);
+		}
+		if(e.getValueIsAdjusting() && src == listaHabitosSimNao) {
+			int index = listaHabitosSimNao.getSelectedIndex();
+			System.out.println("oe");
+			new TelaHabitoSimNao(emailUsuario, dados, index, true);
 		}
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.HabitoMensuravel;
+import modelo.HabitoSimNao;
 
 public class ControleHabitos {
 	public String[] getHabitosMensuraveis(ControleDados dados, int usuarioId) {
@@ -80,7 +81,7 @@ public class ControleHabitos {
 		return index;
 	}
 	
-	public String[] getLembretes(ControleDados dados, int index) {
+	public String[] getLembretesHabitosMensuraveis(ControleDados dados, int index) {
 		String[] dias = dados.getHabitosMensuraveis()[index].getDias();
 		String[] horarios = dados.getHabitosMensuraveis()[index].getHorarios();
 		String[] lembretes = new String[dias.length];
@@ -118,4 +119,71 @@ public class ControleHabitos {
 		dados.setHabitosMensuraveis(null, index);
 	}
 	
+	public String[] getHabitosSimNaoFiltrado(ControleDados dados, int usuarioId) {
+		int qtdHabitos = 0;
+		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
+			if(dados.getHabitosSimNao()[i] != null) {
+				if(dados.getHabitosSimNao()[i].getId() == usuarioId) {
+					qtdHabitos++;
+				}
+			}
+		}
+		
+		Date date = new Date();
+		DateFormat df = new SimpleDateFormat("EEEEE");
+		String dia = df.format(date);
+		String[] habitos = new String[qtdHabitos];
+		int tamanhoLista = 0;
+		
+		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
+			if(dados.getHabitosSimNao()[i] != null) {
+				if(dados.getHabitosSimNao()[i].getId() == usuarioId ) {
+					List<String> lista = Arrays.asList(dados.getHabitosSimNao()[i].getDias());
+					if(lista.contains(dia)) {
+						habitos[tamanhoLista] = dados.getHabitosSimNao()[i].getNome();
+						tamanhoLista++;
+					}
+				}
+			}
+		}
+		
+		return habitos;
+	}
+	
+	public String[] getLembretesHabitosSimNao(ControleDados dados, int index) {
+		String[] dias = dados.getHabitosSimNao()[index].getDias();
+		String[] horarios = dados.getHabitosSimNao()[index].getHorarios();
+		String[] lembretes = new String[dias.length];
+		for(int i = 0; i < dias.length; i++) {
+			if(dias[i] != null) {
+				lembretes[i] = dias[i] + " - " + horarios[i];
+			}
+		}
+		return lembretes;
+	}
+	
+	public String updateHabitosSimNao(
+			ControleDados dados, 
+			int index, 
+			int id,
+			String nome,
+			String frequencia,
+			String anotacoes,
+			String[] horarios,
+			String[] dias
+		) {
+		String mensagem = "";
+		if(nome.equals("") || frequencia.equals("") || horarios[0] == null) {
+			return mensagem = "Preencha todos os campos";
+		}
+
+		HabitoSimNao infos = new HabitoSimNao(nome, anotacoes, horarios, dias, id, frequencia);
+		dados.setHabitosSimNao(infos, index);
+		
+		return mensagem;
+	}
+	
+	public void deletarHabitoSimNao(ControleDados dados, int index) {
+		dados.setHabitosSimNao(null, index);
+	}
 }

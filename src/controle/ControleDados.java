@@ -36,6 +36,10 @@ public class ControleDados {
 		return dados.getHabitoSimNao();
 	}
 	
+	public void setHabitosSimNao(HabitoSimNao infos, int index) {
+		 dados.setHabitoSimNao(infos, index);
+	}
+	
 	public String criarUsuario(String nome, String email, String senha, String senhaRepetida) {
 		String mensagem = "";
 		int qtdUsuarios = dados.getQtdUsuario();
@@ -138,7 +142,7 @@ public class ControleDados {
 			}
 			
 			HabitoSimNao habito = new HabitoSimNao(nome, anotacoes, horarios, dias, id, frequencia);
-			dados.setHabitoSimNao(habito);
+			dados.setHabitoSimNao(habito, qtdHabitosSimNao);
 			dados.setQtdHabitosSimNao(qtdHabitosSimNao + 1);
 			
 			System.out.println(dados.toString());

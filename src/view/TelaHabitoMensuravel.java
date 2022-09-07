@@ -77,7 +77,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 			inputMeta = new JTextField(dados.getHabitosMensuraveis()[index].getMeta());
 			updateHabito = new JButton("Editar hábito");
 			deletarHabito = new JButton("Deletar hábito");
-			String[] listaLembretesCriados = dadosHabitos.getLembretes(dados, index);
+			String[] listaLembretesCriados = dadosHabitos.getLembretesHabitosMensuraveis(dados, index);
 			
 			for(int i = 0; i < listaLembretesCriados.length; i++) {
 				listaLembretes[i] = listaLembretesCriados[i];
@@ -179,7 +179,6 @@ public class TelaHabitoMensuravel implements ActionListener {
 				Object src = e.getSource();
 
 				if(e.getValueIsAdjusting() && src == lembretes) {
-					System.out.println(lembretes.getSelectedIndex());
 					indexLembrete = lembretes.getSelectedIndex();
 				}
 		    }
