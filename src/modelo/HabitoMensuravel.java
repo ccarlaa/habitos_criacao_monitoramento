@@ -27,4 +27,5 @@ public class HabitoMensuravel extends Habito {
 		this.minimo = minimo;
 	}
 	
+	
 }

@@ -20,6 +20,10 @@ public class ControleDados {
 		return dados.getQtdHabitoMensuravel();
 	}
 	
+	public void setHabitosMensuraveis(HabitoMensuravel infos, int index) {
+		 dados.setHabitoMensuravel(infos, index);
+	}
+	
 	public HabitoMensuravel[] getHabitosMensuraveis() {
 		return dados.getHabitoMensuravel();
 	}
@@ -106,7 +110,7 @@ public class ControleDados {
 		}
 		
 		HabitoMensuravel habito = new HabitoMensuravel(nome, anotacoes, horarios, dias, id, meta, minimo);
-		dados.setHabitoMensuravel(habito);
+		dados.setHabitoMensuravel(habito, qtdHabitosMensuraveis);
 		dados.setQtdHabitoMensuravel(qtdHabitosMensuraveis + 1);
 		
 		System.out.println(dados.toString());

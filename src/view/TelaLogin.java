@@ -84,7 +84,6 @@ public class TelaLogin implements ActionListener{
 			JOptionPane.showMessageDialog(null, res, null, 
 					JOptionPane.ERROR_MESSAGE);
 		} else {
-			JOptionPane.showMessageDialog(null, "login bem sucessedido ");
 			new TelaListaHabitos(email, dados);
 		}
 	}
