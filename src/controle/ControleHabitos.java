@@ -11,8 +11,10 @@ public class ControleHabitos {
 	public String[] getHabitosMensuraveis(ControleDados dados, int usuarioId) {
 		int qtdHabitos = 0;
 		for(int i = 0; i < dados.qtdHabitosMensuraveis(); i++) {
-			if(dados.getHabitosMensuraveis()[i].getId() == usuarioId) {
-				qtdHabitos++;
+			if(dados.getHabitosMensuraveis()[i] != null) {
+				if(dados.getHabitosMensuraveis()[i].getId() == usuarioId) {
+					qtdHabitos++;
+				}
 			}
 		}
 		
@@ -28,7 +30,6 @@ public class ControleHabitos {
 					List<String> lista = Arrays.asList(dados.getHabitosMensuraveis()[i].getDias());
 					if(lista.contains(dia)) {
 						habitos[tamanhoLista] = dados.getHabitosMensuraveis()[i].getNome();
-						System.out.println("oe");
 						tamanhoLista++;
 					}
 				}
@@ -102,14 +103,19 @@ public class ControleHabitos {
 			String[] horarios,
 			String[] dias
 		) {
-		
 		String mensagem = "";
+		if(nome.equals("") || meta.equals("") || minimo.equals("") || horarios[0] == null) {
+			return mensagem = "Preencha todos os campos";
+		}
 
 		HabitoMensuravel infos = new HabitoMensuravel(nome, anotacoes, horarios, dias, id, meta, minimo);
 		dados.setHabitosMensuraveis(infos, index);
 		
-		System.out.println(dados.toString());
-		
 		return mensagem;
 	}
+	
+	public void deleteHabitoMensurável(ControleDados dados, int index) {
+		dados.setHabitosMensuraveis(null, index);
+	}
+	
 }

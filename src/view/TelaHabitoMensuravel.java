@@ -33,6 +33,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 	private static JButton deletarHabito;
 	private static ControleUsuario dadosUsuario;
 	private static ControleHabitos dadosHabitos;
+	private static JButton deletarLembrete;
 	private JComboBox<String> selecaoDias;
 	private JList<String> lembretes;
 	String[] dias = {
@@ -50,6 +51,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 	String[] horariosEscolhidos = new String[10];
 	String emailUsuario;
 	int index;
+	int indexLembrete = -1;
 	
 	public TelaHabitoMensuravel(String email, ControleDados d, int idx, boolean editar) {
 		dados = d;
@@ -60,6 +62,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 		dadosUsuario = new ControleUsuario();
 		container = new JFrame("Hábito Mensurável");
 		botaoAddLembrete = new JButton("+ Lembrete");
+		deletarLembrete = new JButton("- Lembrete");
 		inserirLembrete = new JLabel("Adicionar lembrete:");
 		inserirNome = new JLabel("Nome:");
 		inserirAnotacao = new JLabel("Anotações:");
@@ -142,6 +145,8 @@ public class TelaHabitoMensuravel implements ActionListener {
 		inserirLembrete.setFont(new Font("Arial", Font.BOLD, 16));
 		inserirLembrete.setBounds(100, 330, 300, 30);
 		
+		deletarLembrete.setBounds(280,410,120,30);
+		
 		botaoAddLembrete.setBounds(280,370,120,30);
 
 		inputHora.setBounds(100, 370, 50, 30);
@@ -163,16 +168,19 @@ public class TelaHabitoMensuravel implements ActionListener {
 		container.add(selecaoDias);
 		container.add(inputHora);
 		container.add(lembretes);
+		container.add(deletarLembrete);
 		
 		botaoAddLembrete.addActionListener(this);
 		selecaoDias.addActionListener(this);
+		deletarLembrete.addActionListener(this);
 		lembretes.addListSelectionListener(new ListSelectionListener() {
 		    @Override
 		    public void valueChanged(ListSelectionEvent e) {
 				Object src = e.getSource();
 
 				if(e.getValueIsAdjusting() && src == lembretes) {
-					int index = lembretes.getSelectedIndex();
+					System.out.println(lembretes.getSelectedIndex());
+					indexLembrete = lembretes.getSelectedIndex();
 				}
 		    }
 		});
@@ -264,15 +272,17 @@ public class TelaHabitoMensuravel implements ActionListener {
 				new TelaListaHabitos(emailUsuario, dados);
 			}
 		}
+		
 		if(src == updateHabito) {
 			String[] horariosEscolhidos = new String[10];
 			String[] diasEscolhidos = new String[10];
 			
 			for(int i = 0; i < qtdLembretes; i++) {
-				String[] lembreteFiltrado = listaLembretes[i].split(" - ");
-				horariosEscolhidos[i] = lembreteFiltrado[1];
-				diasEscolhidos[i] = lembreteFiltrado[0];
-				System.out.println();
+				if(listaLembretes[i] != null) {
+					String[] lembreteFiltrado = listaLembretes[i].split(" - ");
+					horariosEscolhidos[i] = lembreteFiltrado[1];
+					diasEscolhidos[i] = lembreteFiltrado[0];
+				}
 			}
 			
 			mensagem = dadosHabitos.updateHabitosMensuraveis(
@@ -290,6 +300,23 @@ public class TelaHabitoMensuravel implements ActionListener {
 				JOptionPane.showMessageDialog(null, mensagem);
 			} else {
 				new TelaListaHabitos(emailUsuario, dados);
+			}
+		}
+		
+		if(src == deletarHabito) {
+			dadosHabitos.deleteHabitoMensurável(dados, index);
+			JOptionPane.showMessageDialog(null, "Hábito deletado");
+			new TelaListaHabitos(emailUsuario, dados);
+		}
+		
+		if(src == deletarLembrete) {
+			if(indexLembrete == -1) {
+				JOptionPane.showMessageDialog(null, "Escolha um lembrete para deletar.", null, 
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				qtdLembretes = qtdLembretes - 1;
+				listaLembretes[indexLembrete] = null;
+				lembretes.updateUI();
 			}
 		}
 	}
