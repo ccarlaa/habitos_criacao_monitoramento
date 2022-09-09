@@ -9,9 +9,11 @@ import modelo.Usuario;
 public class ControleUsuario {
 	
     /**
-    * Devolve o identificador de um usuario, caso exista, dado seu email e uma fonte de dados.
+    * Retorna o identificador de um usuario dado seu email e uma fonte de dados.
     *
-    * Percorre a lista de usuarios testando o email enviado como parâmetro do método com o email dos objetos "Usuario"
+    * Percorre a lista de usuarios testando o email enviado como parâmetro do método com o email dos objetos "Usuario".
+    * Se os emails corresponderem o id do usuário é retornado ao front.
+    * 
     *
     * @param email: o email do usuário
     * @param dados: a fonte de dados onde o usuário será buscado
@@ -19,6 +21,7 @@ public class ControleUsuario {
     *
     * @see Usuario
     * @see ControleDados
+    * @see Dados
     */
 	
     public int getIdUsuario(String email, ControleDados dados) {
@@ -31,6 +34,29 @@ public class ControleUsuario {
         }
         return usuarioId;
     }
+    
+    /**
+     * O método criarUsuario valida os dados recebidos e retorna uma mensagem contendo as informações da validação.
+     * Se a validação foi bem sucedida os dados do usuário são salvos na classe Dados
+     * 
+     * É verificado:
+     * - se a senha contem no mínimo 4 caracteres;
+     * - se as senha e a senha de verificação são iguais;
+     * - se já existe um usuário cadastrado com o email em questão;
+     * - se o email está no formato certo;
+     * - se o nome não está em branco.
+     * 
+     * @param dados
+     * @param nome
+     * @param email
+     * @param senha
+     * @param senhaRepetida
+     * @return mensagem
+     * 
+     * @see Dados
+     * @see ControleDados
+     * @see Usuario
+     */
     
 	public String criarUsuario(ControleDados dados, String nome, String email, String senha, String senhaRepetida) {
 		String mensagem = "";
@@ -55,6 +81,20 @@ public class ControleUsuario {
 		
 		return mensagem;
 	}
+	
+	/**
+	 * O método logar faz a validação do email e senha inseridos pelo usuário com os dados de cadastro
+	 * e retorna uma mensagem com as informações da validação.
+	 * 
+	 * @param dados
+	 * @param email
+	 * @param senha
+	 * @return mensagem
+	 * 
+	 * @see ControleDados
+	 * @see Usuario
+	 * @see Dados
+	 */
 	
 	public String logar(ControleDados dados, String email, String senha) {
 		String mensagem = "";
