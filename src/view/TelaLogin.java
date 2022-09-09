@@ -1,12 +1,18 @@
 package view;
-import controle.*;
 
+import controle.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * TelaLogin é responsável por realizar o login do usuário
+ * por meio da insercão do email e da senha pré cadastrados
+ */
+
 public class TelaLogin implements ActionListener{
+	
 	private static JFrame container;
 	private static JButton botao;
 	private static JTextField inputEmail;
@@ -15,6 +21,7 @@ public class TelaLogin implements ActionListener{
 	private static JLabel inserirEmail;
 	private static JLabel criarConta;
 	private static ControleDados dados;
+	private static ControleUsuario dadosUsuario = new ControleUsuario();
 	
 	public TelaLogin(ControleDados d) {
 		dados = d;
@@ -68,6 +75,7 @@ public class TelaLogin implements ActionListener{
 		    }
 		);
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		String email = inputEmail.getText();
 		char[] senha = inputSenha.getPassword();
@@ -78,7 +86,7 @@ public class TelaLogin implements ActionListener{
 		String res = "";
 		
 		if(src == botao) {
-			res = dados.logar(email, stringSenha);
+			res = dadosUsuario.logar(dados, email, stringSenha);
 		}
 		if(!res.equals("")) {
 			JOptionPane.showMessageDialog(null, res, null, 

@@ -19,6 +19,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 	private static JButton botaoAddLembrete;
 	private static JButton adicionarHabito;
 	private static JButton updateHabito;
+	private static JButton botaoFeito;
 	private static JTextField inputMeta;
 	private static JTextField inputAnotacao;
 	private static JTextField inputMinimo;
@@ -69,6 +70,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 		inserirUnidade = new JLabel("Mínimo:");
 		inserirMeta = new JLabel("Meta:");
 		selecaoDias = new JComboBox<>(dias);
+		botaoFeito = new JButton("Hábito feito");
 		
 		if(editar) {
 			inputNome = new JTextField(dados.getHabitosMensuraveis()[index].getNome());
@@ -85,14 +87,17 @@ public class TelaHabitoMensuravel implements ActionListener {
 			
 			qtdLembretes = listaLembretesCriados.length;
 			
-			updateHabito.setBounds(100, 660, 300, 30);
-			deletarHabito.setBounds(100, 700, 300, 30);
+			updateHabito.setBounds(100, 630, 300, 30);
+			deletarHabito.setBounds(100, 770, 300, 30);
+			botaoFeito.setBounds(100, 810, 300, 30);
 			
 			container.add(deletarHabito);
 			container.add(updateHabito);
+			container.add(botaoFeito);
 			
 			deletarHabito.addActionListener(this);
 			updateHabito.addActionListener(this);
+			botaoFeito.addActionListener(this);
 		} else {
 			inputNome = new JTextField(10);
 			inputAnotacao = new JTextField(10);
@@ -118,7 +123,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 		
 		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Cadastro");
-		container.setSize(500, 800);
+		container.setSize(500, 850);
 		container.setLocation(500, 300);
 		container.setLayout(null);
 		
@@ -167,8 +172,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 		container.add(inserirMeta);
 		container.add(selecaoDias);
 		container.add(inputHora);
-		container.add(lembretes);
-		container.add(deletarLembrete);
+
 		
 		botaoAddLembrete.addActionListener(this);
 		selecaoDias.addActionListener(this);
@@ -256,7 +260,8 @@ public class TelaHabitoMensuravel implements ActionListener {
 		
 		if(src == adicionarHabito) {
 			
-			mensagem = dados.salvarHabitoMensuravel(
+			mensagem = dadosHabitos.salvarHabitoMensuravel(
+				dados,
 				usuarioId,
 				nome, 
 				meta, 
@@ -303,7 +308,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 		}
 		
 		if(src == deletarHabito) {
-			dadosHabitos.deleteHabitoMensurável(dados, index);
+			dadosHabitos.deleteHabitoMensuravel(dados, index);
 			JOptionPane.showMessageDialog(null, "Hábito deletado");
 			new TelaListaHabitos(emailUsuario, dados);
 		}
@@ -316,6 +321,37 @@ public class TelaHabitoMensuravel implements ActionListener {
 				qtdLembretes = qtdLembretes - 1;
 				listaLembretes[indexLembrete] = null;
 				lembretes.updateUI();
+			}
+		}
+		
+		if(src == botaoFeito) {
+			String[] horariosEscolhidos = new String[10];
+			String[] diasEscolhidos = new String[10];
+			
+			for(int i = 0; i < qtdLembretes; i++) {
+				if(listaLembretes[i] != null) {
+					String[] lembreteFiltrado = listaLembretes[i].split(" - ");
+					horariosEscolhidos[i] = lembreteFiltrado[1];
+					diasEscolhidos[i] = lembreteFiltrado[0];
+				}
+			}
+			
+			String habitoFeito = dadosHabitos.habitoMensuravelFeito(
+					dados,
+					index,
+					usuarioId,
+					nome, 
+					meta, 
+					minimo, 
+					anotacao, 
+					horariosEscolhidos, 
+					diasEscolhidos
+			);
+			if(habitoFeito != "") {
+				JOptionPane.showMessageDialog(null, habitoFeito, null, 
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				new TelaListaHabitos(emailUsuario, dados);
 			}
 		}
 	}

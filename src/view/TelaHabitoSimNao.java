@@ -24,6 +24,7 @@ import controle.ControleUsuario;
 public class TelaHabitoSimNao implements ActionListener {
 	private static JFrame container;
 	private static JButton botaoAddLembrete;
+	private static JButton botaoFeito;
 	private static JButton adicionarHabito;
 	private static JButton updateHabito;
 	private static JTextField inputFrequencia;
@@ -41,6 +42,7 @@ public class TelaHabitoSimNao implements ActionListener {
 	private static JButton deletarHabito;
 	private JList<String> lembretes;
 	private JComboBox<String> selecaoDias;
+	
 	String[] dias = {
 		"segunda-feira",
 		"terça-feira",
@@ -70,6 +72,7 @@ public class TelaHabitoSimNao implements ActionListener {
 		botaoAddLembrete = new JButton("+ Lembrete");
 		deletarLembrete = new JButton("- Lembrete");
 		adicionarHabito = new JButton("Adicionar hábito");
+		botaoFeito = new JButton("Hábito feito");
 		inserirLembrete = new JLabel("Adicionar lembrete:");
 		inserirNome = new JLabel("Nome:");
 		inserirAnotacao = new JLabel("Anotações:");
@@ -93,12 +96,15 @@ public class TelaHabitoSimNao implements ActionListener {
 			
 			updateHabito.setBounds(100, 590, 300, 30);
 			deletarHabito.setBounds(100, 630, 300, 30);
+			botaoFeito.setBounds(100, 670, 300, 30);
 			
 			container.add(deletarHabito);
 			container.add(updateHabito);
+			container.add(botaoFeito);
 			
 			deletarHabito.addActionListener(this);
 			updateHabito.addActionListener(this);
+			botaoFeito.addActionListener(this);
 		} else {
 			inputNome = new JTextField(10);
 			inputAnotacao = new JTextField(10);
@@ -199,7 +205,10 @@ public class TelaHabitoSimNao implements ActionListener {
 		
 		if(src == botaoAddLembrete) {
 			diaEscolhido = selecaoDias.getItemAt(selecaoDias.getSelectedIndex());
-			if(diaEscolhido != null && horarioSemMascara[0].matches("[0-9]{2}") && horarioSemMascara[1].matches("[0-9]{2}")) {
+			if(diaEscolhido != null && 
+				horarioSemMascara[0].matches("[0-9]{2}") 
+				&& horarioSemMascara[1].matches("[0-9]{2}"
+			)) {
 				int horas = Integer.parseInt(horarioSemMascara[0]);
 				int minutos = Integer.parseInt(horarioSemMascara[1]);
 				String lembrete = diaEscolhido + " - " + horario;
@@ -253,7 +262,8 @@ public class TelaHabitoSimNao implements ActionListener {
 		};
 		
 		if(src == adicionarHabito) {
-			mensagem = dados.salvarHabitoSimNao(
+			mensagem = dadosHabitos.salvarHabitoSimNao(
+				dados,
 				usuarioId,
 				nome, 
 				frequencia, 
@@ -311,6 +321,36 @@ public class TelaHabitoSimNao implements ActionListener {
 				qtdLembretes = qtdLembretes - 1;
 				listaLembretes[indexLembrete] = null;
 				lembretes.updateUI();
+			}
+		}
+		
+		if(src == botaoFeito) {
+			String[] horariosEscolhidos = new String[10];
+			String[] diasEscolhidos = new String[10];
+			
+			for(int i = 0; i < qtdLembretes; i++) {
+				if(listaLembretes[i] != null) {
+					String[] lembreteFiltrado = listaLembretes[i].split(" - ");
+					horariosEscolhidos[i] = lembreteFiltrado[1];
+					diasEscolhidos[i] = lembreteFiltrado[0];
+				}
+			}
+			
+			String habitoFeito = dadosHabitos.habitoSimNaoFeito(
+					dados, 
+					index, 
+					usuarioId, 
+					nome, 
+					frequencia, 
+					anotacao, 
+					horariosEscolhidos, 
+					diasEscolhidos
+			);
+			if(habitoFeito != "") {
+				JOptionPane.showMessageDialog(null, habitoFeito, null, 
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				new TelaListaHabitos(emailUsuario, dados);
 			}
 		}
 	}

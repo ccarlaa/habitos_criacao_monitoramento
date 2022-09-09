@@ -20,6 +20,7 @@ public class TelaCriacaoConta implements ActionListener {
 	private static JLabel inserirSenhaNovamente;
 	private static JLabel login;
 	private static ControleDados dados = new ControleDados();
+	private ControleUsuario dadosUsuario = new ControleUsuario();
 	
 	public TelaCriacaoConta() {
 		
@@ -104,7 +105,7 @@ public class TelaCriacaoConta implements ActionListener {
 		String res = "";
 		
 		if(src == botao) {
-			res = dados.criarUsuario(nome, email, stringSenha, stringSenhaRepetida);	
+			res = dadosUsuario.criarUsuario(dados, nome, email, stringSenha, stringSenhaRepetida);	
 		}
 		if(!res.equals("")) {
 			JOptionPane.showMessageDialog(null, res, null, 

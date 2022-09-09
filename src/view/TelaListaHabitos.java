@@ -4,11 +4,14 @@ import controle.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -33,21 +36,33 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 	private  ControleUsuario dadosUsuario;
 	private String[] listaHabitosMensuraveisInfos;
 	private String[] listaHabitosSimNaoInfos;
+	String diaEscolhido;
 	String emailUsuario;
+	List<String> diasDaSemana = new ArrayList();
+	String[] arrayDeDias = new String[7];
+	String[] dias = {
+			"segunda-feira",
+			"terça-feira",
+			"quarta-feira",
+			"quinta-feira",
+			"sexta-feira",
+			"sábado",
+			"domingo"
+		};
 	
 	public TelaListaHabitos(String email,ControleDados d) {
 		dadosHabitos = new ControleHabitos();
 		dadosUsuario = new ControleUsuario();
 		dados = d;
 		emailUsuario = email;
-		
-		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
-		listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
-		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNaoFiltrado(dados, usuarioId);
 
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("EEEEE");
 
+		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
+		listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
+		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNaoFiltrado(dados, usuarioId);
+		
 		container = new JFrame("Hábitos");
 		dia = new JLabel("Hoje é " + df.format(date));
 		habitosMensuraveis = new JLabel("Hábitos Mensuráveis:");
@@ -56,8 +71,7 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		botao2 = new JButton("Sim ou Não");
 		listaHabitosMensuraveis = new JList<String>(listaHabitosMensuraveisInfos);
 		listaHabitosSimNao = new JList<String>(listaHabitosSimNaoInfos);
-
-		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
+		
 		container.setTitle("Hábitos");
 		container.setSize(500, 600);
 		container.setLocation(500, 300);
