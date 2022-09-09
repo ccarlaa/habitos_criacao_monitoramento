@@ -17,39 +17,64 @@ public class TesteHabitos {
 
     @Test
     public void getHabitosMensuraveis() {
-        controleUsuario.criarUsuario(dados,"Maria Jose Silva", "maria_jose3@hotmail.com", "majose12345", "majose12345");
+        controleHabitos.getHabitosMensuraveis(dados, 1);
         assertTrue(controleHabitos.equals(controleHabitos));
     }
 
     @Test
     public void getHabitosSimNao() {
+    	controleHabitos.getHabitosSimNao(dados, 1);
         assertTrue(controleHabitos.equals(controleHabitos));
     }
 
 
     @Test
     public void getIndexHabitosMensuraveis() {
+    	controleHabitos.getIndexHabitoMensuravel(dados, 1, "Joana");
         assertTrue(controleHabitos.equals(controleHabitos));
     }
 
     @Test
     public void getLembretesHabitosMensuraveis() {
+    	controleHabitos.getLembretesHabitosMensuraveis(dados, 1);
+        assertTrue(controleHabitos.equals(controleHabitos));
+    }
+    
+
+    @Test
+    public void habitosMensuravelFeito() {
+    	String[] horarios = {"10 : 30"};
+    	String[] dias = {"quinta-feira"};
+    	controleHabitos.habitoMensuravelFeito(dados, 0, 1, "Joana", "5km", "2km", "feito pela metade", horarios, dias);
         assertTrue(controleHabitos.equals(controleHabitos));
     }
 
+    @Test
+    public void habitoSimNaoFeito() {
+    	String[] horarios = {"15 : 30"};
+    	String[] dias = {"segunda-feira"};
+    	controleHabitos.habitoSimNaoFeito(dados, 0, 1, "Joana", "uma vez por semana", "esqueci de beber água", horarios, dias);
+        assertTrue(controleHabitos.equals(controleHabitos));
+    }
+    
     @Test
     public void updateHabitosMensuraveis() {
-        controleHabitos.updateHabitosMensuraveis(null, 0, 0, "", "", "", "", null, null);
-        assertTrue(controleHabitos.equals(controleHabitos));
+    	String[] horarios = {"13 : 00", "08 : 00"};
+    	String[] dias = {"quarta-feira", "quinta-feira"};
+        controleHabitos.updateHabitosMensuraveis(dados, 0, 1, "Joana", "5km", "2km", "feito pela metade", horarios, dias);
+        HabitoMensuravel[] updateMensuraveis = dados.getHabitosMensuraveis();
+        assertTrue(updateMensuraveis.equals(updateMensuraveis));
     }
 
     @Test
-    public void deletarHabitosMensuraveis() {
+    public void deleteHabitoMensuravel() {
+    	controleHabitos.deleteHabitoMensuravel(dados, 1);
         assertTrue(controleHabitos.equals(controleHabitos));
     }
 
     @Test
     public void getHabitosSimNaoFiltrado() {
+    	controleHabitos.deleteHabitoMensuravel(dados, 1);
         assertTrue(controleHabitos.equals(controleHabitos));
         }
 
@@ -60,27 +85,33 @@ public class TesteHabitos {
 
     @Test
     public void updateHabitosSimNao() {
-        controleHabitos.updateHabitosSimNao(null, 0, 0, "", "", "", null, null);
-        assertTrue(controleHabitos.equals(controleHabitos));
+    	String[] horarios = {"11 : 00", "09 : 00"};
+    	String[] dias = {"sábado", "domingo"};
+        controleHabitos.updateHabitosSimNao(dados, 0, 1,"Joana", "uma vez por semana", "esqueci de beber água", horarios, dias);
+        HabitoSimNao[] updateSimNao = dados.getHabitosSimNao();
+        assertTrue(updateSimNao.equals(updateSimNao));
         }
 
     @Test
     public void deletarHabitosSimNao() {
+    	controleHabitos.deletarHabitoSimNao(dados, 1);
         assertTrue(controleHabitos.equals(controleHabitos));
         }
     
     @Test
     public void salvarHabitoMensuravel() {
     	String[] horarios = {"12 : 00", "06 : 00"};
-    	String[] dias = {"segunda-feira", "terÃ§a-feira"};
-    	controleHabitos.salvarHabitoMensuravel(dados,1, "", "", "", "", horarios, dias);
+    	String[] dias = {"segunda-feira", "terça-feira"};
+    	controleHabitos.salvarHabitoMensuravel(dados,1, "Joana", "5km", "2km", "feito pela metade", horarios, dias);
         HabitoMensuravel[] salvandoMensuraveis = dados.getHabitosMensuraveis();
         assertTrue(salvandoMensuraveis.equals(salvandoMensuraveis));
     }
 
     @Test
     public void salvarHabitoSimNao() {
-    	controleHabitos.salvarHabitoSimNao(dados, 0, "", "", "", null, null);
+    	String[] horarios = {"16 : 00"};
+    	String[] dias = {"sexta-feira"};
+    	controleHabitos.salvarHabitoSimNao(dados, 0, "Joana", "uma vez por semana", "esqueci de beber água", horarios, dias);
         HabitoSimNao[] salvandoSimNao = dados.getHabitosSimNao();
         assertTrue(salvandoSimNao.equals(salvandoSimNao));
     }
