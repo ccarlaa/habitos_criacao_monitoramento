@@ -111,7 +111,6 @@ public class ControleHabitos {
 		) {
 		
 		String mensagem = "";
-		int qtdHabitosMensuraveis = dados.qtdHabitosMensuraveis();
 		
 		if(nome.equals("") || meta.equals("") || minimo.equals("") || horarios[0] == null) {
 			return mensagem = "Preencha todos os campos";
@@ -271,7 +270,6 @@ public class ControleHabitos {
 			String[] dias
 		) {
 		String mensagem = "";
-		int qtdHabitosSimNao = dados.qtdHabitosSimNao();
 		
 		if(nome.equals("") || anotacoes.equals("") || frequencia.equals("") || horarios[0] == null) {
 			return mensagem = "Preencha todos os campos";

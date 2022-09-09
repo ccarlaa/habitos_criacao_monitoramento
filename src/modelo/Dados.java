@@ -1,7 +1,5 @@
 package modelo;
 
-import java.util.Arrays;
-
 /**
  * A classe Dados guarda as informações dos objetos criados 
  * 
