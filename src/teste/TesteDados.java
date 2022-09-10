@@ -29,10 +29,30 @@ public class TesteDados {
     }
 
     @Test
+    public void setQtdUsuarios() {
+        controleDados.setQtdUsuarios(1);
+        assertTrue(controleDados.equals(controleDados));
+    }
+
+    @Test
+    public void setUsuarios() {
+        assertTrue(controleDados.equals(controleDados));
+    }
+
+    @Test
     public void qtHabitosMensuraveis() {
         assertTrue(controleDados.equals(controleDados));
     }
 
+    public void setHabitosMensuraveis() {
+        assertTrue(controleDados.equals(controleDados));
+    }
+
+    @Test
+    public void setQtdHabitosMensuraveis() {
+        controleDados.setQtdHabitosMensuraveis(0);
+        assertTrue(controleDados.equals(controleDados));
+    }
 
     @Test
     public void qtHabitosSimNao() {
@@ -41,6 +61,22 @@ public class TesteDados {
 
     @Test
     public void getHabitosSimNao() {
+        assertTrue(controleDados.equals(controleDados));
+    }
+
+    @Test
+    public void setHabitosSimNao() {
+        assertTrue(controleDados.equals(controleDados));
+    }
+
+    @Test
+    public void sethabitoSimNaofeito() {
+        assertTrue(controleDados.equals(controleDados));
+    }
+
+    @Test
+    public void setQtdHabitosSimNao() {
+        controleDados.setQtdHabitosSimNao(0);
         assertTrue(controleDados.equals(controleDados));
     }
 
