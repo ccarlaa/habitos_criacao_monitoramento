@@ -22,12 +22,12 @@ public abstract class Habito {
 	/**
 	 * Método construtor da classe abstrata Hábito
 	 * 
-	 * @param nome 
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
-	 * @param id
-	 * @param feito
+	 * @param nome nome do hábito
+	 * @param anotacoes anorações do hábito
+	 * @param horarios horários que o hábito deve ser realizado
+	 * @param dias dias que o hábito deve ser realizado
+	 * @param id identificador do usuário criador do hábito
+	 * @param feito identifica se hábito foi ou não feito
 	 */
 	
 	public Habito(String nome, String anotacoes, String[] horarios, String[] dias, int id, boolean feito) {
@@ -52,7 +52,7 @@ public abstract class Habito {
 	/**
 	 * Define o nome do hábito
 	 * 
-	 * @param nome
+	 * @param nome nome do hábito
 	 */
 	
 	public void setNome(String nome) {
@@ -72,7 +72,7 @@ public abstract class Habito {
 	/**
 	 * Define as anotações do hábito
 	 * 
-	 * @param anotacoes
+	 * @param anotacoes anotações do hábito
 	 */
 	
 	public void setAnotacoes(String anotacoes) {
@@ -92,7 +92,7 @@ public abstract class Habito {
 	/**
 	 * Define os horários do hábito
 	 * 
-	 * @param horarios
+	 * @param horarios horários que o hábito deve ser realizado
 	 */
 
 	public void setHorarios(String[] horarios) {
@@ -112,7 +112,7 @@ public abstract class Habito {
 	/**
 	 * Define os dias da semana do hábito
 	 * 
-	 * @param dias
+	 * @param dias dias que o hábito deve ser realizado
 	 */
 
 	public void setDias(String[] dias) {
@@ -132,7 +132,7 @@ public abstract class Habito {
 	/**
 	 * Define o identificador do usuário que criou o hábito
 	 * 
-	 * @param id
+	 * @param id identificador do usuário criador do hábito
 	 */
 
 	public void setId(int id) {
@@ -152,7 +152,7 @@ public abstract class Habito {
 	/**
 	 * Define se o hábito foi ou não feito
 	 * 
-	 * @param feito
+	 * @param feito indica se o hábito já foi realizado
 	 */
 
 	public void setFeito(boolean feito) {

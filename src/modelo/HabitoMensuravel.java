@@ -18,14 +18,14 @@ public class HabitoMensuravel extends Habito {
 	 * Método construtor da classe HabitoMensuravel que herda os métodos e atributos
 	 * da classe abstrata Habito
 	 * 
-	 * @param nome
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
-	 * @param id
-	 * @param feito
-	 * @param meta
-	 * @param minimo
+	 * @param nome nome do hábito
+	 * @param anotacoes anorações do hábito
+	 * @param horarios horários que o hábito deve ser realizado
+	 * @param dias dias que o hábito deve ser realizado
+	 * @param id identificador do usuário criador do hábito
+	 * @param feito identifica se hábito foi ou não feito
+	 * @param meta meta do hábito
+	 * @param minimo mínimo a ser feito do hábito
 	 */
 
 	public HabitoMensuravel(String nome, String anotacoes, String[] horarios, String[] dias, int id, boolean feito,
@@ -38,7 +38,7 @@ public class HabitoMensuravel extends Habito {
 	/**
 	 * Retorna a meta definida para o hábito
 	 * 
-	 * @return
+	 * @return meta
 	 */
 	
 	public String getMeta() {
@@ -48,7 +48,7 @@ public class HabitoMensuravel extends Habito {
 	/**
 	 * Define a meta do hábito 
 	 * 
-	 * @param meta
+	 * @param meta meta do hábito
 	 */
 	
 	public void setMeta(String meta) {
@@ -58,7 +58,7 @@ public class HabitoMensuravel extends Habito {
 	/**
 	 * Retorna o mínimo a ser cumprido da meta
 	 * 
-	 * @return
+	 * @return mínimo 
 	 */
 
 	public String getMinimo() {
@@ -68,7 +68,7 @@ public class HabitoMensuravel extends Habito {
 	/**
 	 * Define o mínimo a ser cumprido da meta
 	 * 
-	 * @param minimo
+	 * @param minimo mínimo a ser feito do hábito
 	 */
 	
 	public void setMinimo(String minimo) {

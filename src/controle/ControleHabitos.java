@@ -20,13 +20,12 @@ public class ControleHabitos {
 	 * Responsável por filtrar os hábitos do tipo "mensurável" por meio do identificador do usuário.
 	 * Retorna os nomes dos hábitos com um emoji se o hábito foi feito e sem caso contrário.
 	 * 
-	 * @param dados
-	 * @param usuarioId
+	 * @param dados todas as informações salvas
+	 * @param usuarioId identificador do usuário
 	 * 
 	 * @return habitos mensuraveis
 	 * 
 	 * @see ControleDados
-	 * @see Dados
 	 */
 	
 	public String[] getHabitosMensuraveis(ControleDados dados, int usuarioId) {
@@ -68,14 +67,13 @@ public class ControleHabitos {
 	 * Retorna a posição que se encontra as informações de um hábito do tipo "mensurável" no array 
 	 * "habitoMensuravel" da classe Dados.
 	 * 
-	 * @param dados
-	 * @param usuarioId
-	 * @param nome
+	 * @param dados todas as informações salvas
+	 * @param usuarioId identificado do usuário
+	 * @param nome nome do hábito selecionado
 	 * 
-	 * @return index
+	 * @return index - posição do hábito no array
 	 * 
 	 * @see ControleDados
-	 * @see Dados
 	 */
 	
 	public int getIndexHabitoMensuravel(ControleDados dados, int usuarioId, String nome) {
@@ -95,12 +93,11 @@ public class ControleHabitos {
 	 * Retorna os lembretes do hábito do tipo "mensurável" presente na posição (index) especificada do 
 	 * array habitoMensuravel da classe Dados.
 	 * 
-	 * @param dados
-	 * @param index
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito selecionado no array
 	 * 
-	 * @return lembretes
+	 * @return lembretes 
 	 * 
-	 * @see Dados
 	 * @see ControleDados
 	 */
 	
@@ -117,7 +114,8 @@ public class ControleHabitos {
 	}
 	
 	/**
-	 * Responsável por definir um hábito do tipo "mensurável" como feito.
+	 * Responsável por definir um hábito do tipo "mensurável", na posição especificada (index)
+	 * do array habitoMensuravel da classe Dados, como feito.
 	 * 
 	 * Valida se as informações do hábito estão corretas e se o hábito já não está marcado
 	 * como feito. Se a validação não for bem sucedida, retorna uma mensagem contendo o
@@ -127,23 +125,25 @@ public class ControleHabitos {
 	 * da classe Dados, é realizada uma atualização dos dados. 
 	 * 
 	 * É validado:
-	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
-	 *	- se o hábito já foi feito
 	 * 
-	 * @param dados
-	 * @param index
-	 * @param id
-	 * @param nome
-	 * @param meta
-	 * @param minimo
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
+	 * <ol>
+	 * 	<li>se todos os campos foram preenchidos, salvo o campo "anotações"</li>
+	 * 	<li>se o hábito já foi feito</li>
+	 * </ol>
+	 * 
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito no array
+	 * @param id identificador do usuário
+	 * @param nome nome do hábito
+	 * @param meta meta do hábito
+	 * @param minimo mínimo a ser realizado do hábito
+	 * @param anotacoes anotações do hábito
+	 * @param horarios horários que o hábito deve ser cumprido
+	 * @param dias dias que o hábito deve ser cumprido
 	 * 
 	 * @return mensagem
 	 * 
 	 * @see ControleDados
-	 * @see Dados
 	 * @see HabitoMensuravel
 	 */
 	
@@ -183,23 +183,24 @@ public class ControleHabitos {
 	 * contendo o problema, caso contrário, atualiza as informções do hábito em questão.
 	 * 
 	 * É validado:
-	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
+	 * <ol>
+	 * 	<li>se todos os campos foram preenchidos, salvo o campo "anotações"</li>
+	 * </ol>
 	 * 
 	 * 
-	 * @param dados
-	 * @param index
-	 * @param id
-	 * @param nome
-	 * @param meta
-	 * @param minimo
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito no array
+	 * @param id identificador do usuário
+	 * @param nome nome do hábito
+	 * @param meta meta do hábito
+	 * @param minimo mínimo a ser realizado do hábito
+	 * @param anotacoes anotações do hábito
+	 * @param horarios horários que o hábito deve ser cumprido
+	 * @param dias dias que o hábito deve ser cumprido
 	 * 
 	 * @return mensagem
 	 * 
 	 * @see ControleDados
-	 * @see Dados
 	 * @see HabitoMensuravel
 	 */
 	
@@ -229,10 +230,11 @@ public class ControleHabitos {
 	 * Apaga as informações de um hábito do tipo "mensurável" a partir da sua posição (index)
 	 * no array "habitoMensuravel" da classe Dados.
 	 * 
-	 * @param dados
-	 * @param index
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito no array
 	 * 
-	 * @see Dados
+	 * @see ControleDados
+	 * 
 	 */
 	
 	public void deleteHabitoMensuravel(ControleDados dados, int index) {
@@ -251,19 +253,18 @@ public class ControleHabitos {
 	 * 	- se todos os campos foram preenchidos, salvo "anotações"
 	 * 	- se já existe um hábito com o mesmo nome
 	 * 
-	 * @param dados
-	 * @param id
-	 * @param nome
-	 * @param meta
-	 * @param minimo
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
+	 * @param dados todas as informações salvas
+	 * @param id identificador do usuário
+	 * @param nome nome do hábito
+	 * @param meta meta do hábito
+	 * @param minimo mínimo a ser realizado do hábito
+	 * @param anotacoes anotações do hábito
+	 * @param horarios horários que o hábito deve ser cumprido
+	 * @param dias dias que o hábito deve ser cumprido
 	 * 
 	 * @return mensagem
 	 * 
 	 * @see HabitoMensuravel
-	 * @see Dados
 	 * @see HabitoMensuravel
 	 */
 	
@@ -304,13 +305,12 @@ public class ControleHabitos {
 	 * Retorna os nomes dos hábitos com um emoji se o hábito foi feito e sem caso contrário.
 	 * 
 	 * 
-	 * @param dados
-	 * @param usuarioId
+	 * @param dados todas as informações salvas
+	 * @param usuarioId posição do hábito no array
 	 * 
 	 * @return mensagem
 	 * 
 	 * @see ControleDados
-	 * @see Dados
 	 */
 	
 	public String[] getHabitosSimNao(ControleDados dados, int usuarioId) {
@@ -356,21 +356,23 @@ public class ControleHabitos {
 	 * Faz a validação dos dados e retorna uma mensagem em caso de erro explicando o problema.
 	 * 
 	 * É validado: 
-	 * 	- se todos os campos foram preenchidos, salvo "anotações"
-	 * 	- se já existe um hábito com o mesmo nome
 	 * 
-	 * @param dados
-	 * @param id
-	 * @param nome
-	 * @param frequencia
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
+	 * <ol>
+	 * 	<li>se todos os campos foram preenchidos, salvo "anotações"</li>
+	 *  <li>se já existe um hábito com o mesmo nome</li>
+	 * </ol>
+	 * 
+	 * @param dados todas as informações salvas
+	 * @param id identificador do usuário
+	 * @param nome nome do hábito
+	 * @param frequencia quantidade de vezes que o hábito deve ser realizado
+	 * @param anotacoes anotações do hábito
+	 * @param horarios horários que o hábito deve ser cumprido
+	 * @param dias dias que o hábito deve ser cumprido
 	 * 
 	 * @return mensagem
 	 * 
 	 * @see ControleDados
-	 * @see Dados
 	 */
 		
 	public String salvarHabitoSimNao(
@@ -405,12 +407,11 @@ public class ControleHabitos {
 	 * Retorna os lembretes do hábito do tipo "sim não" presente na posição (index) especificada do array habitoMensuravel
 	 * da classe Dados.
 	 * 
-	 * @param dados
-	 * @param index
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito no array
 	 * 
 	 * @return lembretes
 	 * 
-	 * @see Dados
 	 * @see ControleDados
 	 */
 	
@@ -437,22 +438,23 @@ public class ControleHabitos {
 	 * da classe Dados, é realizada uma atualização dos dados. 
 	 * 
 	 * É validado:
-	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
-	 *	- se o hábito já foi feito
+	 * <ol>
+	 * 	<li>se todos os campos foram preenchidos, salvo "anotações"</li>
+	 *  <li>se já existe um hábito com o mesmo nome</li>
+	 * </ol>
 	 * 
 	 * 
-	 * @param dados
-	 * @param index
-	 * @param id
-	 * @param nome
-	 * @param frequencia
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito no array
+	 * @param id identificador do usuário
+	 * @param nome nome do hábito
+	 * @param frequencia quantidade de vezes que o hábito deve ser realizado
+	 * @param anotacoes anotações do hábito
+	 * @param horarios horários que o hábito deve ser cumprido
+	 * @param dias dias que o hábito deve ser cumprido
 	 * 
 	 * @return mensagem
 	 * 
-	 * @see Dados
 	 * @see ControleDados
 	 * @see HabitoSimNao
 	 */
@@ -493,18 +495,17 @@ public class ControleHabitos {
 	 * É validado:
 	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
 	 * 
-	 * @param dados
-	 * @param index
-	 * @param id
-	 * @param nome
-	 * @param frequencia
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito no array
+	 * @param id identificador do usuário
+	 * @param nome nome do hábito
+	 * @param frequencia quantidade de vezes que o hábito deve ser realizado
+	 * @param anotacoes anotações do hábito
+	 * @param horarios horários que o hábito deve ser cumprido
+	 * @param dias dias que o hábito deve ser cumprido
 	 * 
 	 * @return mensagem
 	 * 
-	 * @see Dados
 	 * @see ControleDados
 	 * @see HabitoSimNao
 	 */
@@ -534,10 +535,9 @@ public class ControleHabitos {
 	 * Apaga as informações de um hábito do tipo "sim não" a partir da sua posição (index)
 	 * no array "habitoSimNao" da classe Dados
 	 * 
-	 * @param dados
-	 * @param index
+	 * @param dados todas as informações salvas
+	 * @param index posição do hábito no array
 	 * 
-	 * @see Dados
 	 * @see ControleDados
 	 */
 	

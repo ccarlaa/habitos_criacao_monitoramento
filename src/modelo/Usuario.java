@@ -15,10 +15,10 @@ public class Usuario {
 	/**
 	 * Método construtor da classe usuário
 	 * 
-	 * @param nome
-	 * @param email
-	 * @param senha
-	 * @param id
+	 * @param nome nome do usuário
+	 * @param email email do usuário
+	 * @param senha senha do usuário
+	 * @param id identificador do usuário
 	 */
 	
 	public Usuario(String nome, String email, String senha, int id) {
@@ -31,7 +31,7 @@ public class Usuario {
 	/**
 	 * Retorna o nome do usuário
 	 * 
-	 * @return nome
+	 * @return nome nome do usuário
 	 */
 
 	public String getNome() {
@@ -51,7 +51,7 @@ public class Usuario {
 	/**
 	 * Retorna o email do usuário
 	 * 
-	 * @return email
+	 * @return email 
 	 */
 	
 	public String getEmail() {
@@ -61,7 +61,7 @@ public class Usuario {
 	/**
 	 * Define o email do usuário
 	 * 
-	 * @param email
+	 * @param email email do usuário
 	 */
 	
 	public void setEmail(String email) {
@@ -81,7 +81,7 @@ public class Usuario {
 	/**
 	 * Define o nome do usuário
 	 * 
-	 * @param senha
+	 * @param senha senha do usuário
 	 */
 	
 	public void setSenha(String senha) {
@@ -101,7 +101,7 @@ public class Usuario {
 	/**
 	 * Define o identificador do usuário
 	 * 
-	 * @param id
+	 * @param id identificador do usuário
 	 */
 	
 	public void setId(int id) {

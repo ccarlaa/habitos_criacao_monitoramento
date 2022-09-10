@@ -7,6 +7,13 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+/**
+ * A classe TelaCriacaoConta é responsável por definir o layout da tela de criação de conta,
+ * além de realizar o cadastramento do usuário
+ * 
+ * @author carla
+ */
+
 public class TelaCriacaoConta implements ActionListener {
 	private static JFrame container;
 	private static JButton botao;
@@ -21,6 +28,21 @@ public class TelaCriacaoConta implements ActionListener {
 	private static JLabel login;
 	private static ControleDados dados = new ControleDados();
 	private ControleUsuario dadosUsuario = new ControleUsuario();
+	
+	/**
+	 * Define os elementos presente na página.
+	 * 
+	 * <ol>
+     *  <li>inputNome: recebe o nome do usuário;</li>
+	 * 	<li>inputEmail: recebe o email do usuário;</li>
+	 *  <li>inputSenha: recebe a senha do usuário</li>
+	 *  <li>input senhaNovamente: recebe, novamente, a senha do usuário</li>
+	 *  <li>login: direciona o usuário para a página de login</li>
+	 * 	<li>botao: possui um evento associado que quando disparado efetua o cadastro do usuário</li>
+	 * </ol>
+	 * 
+	 * @see ControleUsuario
+	 */
 	
 	public TelaCriacaoConta() {
 		
@@ -91,6 +113,15 @@ public class TelaCriacaoConta implements ActionListener {
 		
 		container.setVisible(true);
 	}
+	
+	/**
+	 * Quando um evento é disparado no componente "botao" realiza o cadastramento do usuário.
+	 * Se o cadastro não foi realizadado, é mostrado um aviso na tela, caso contrário o usuário
+	 * é direcionado para a página de login.
+	 * 
+	 * @see TelaLogin
+	 * @see ControleUsuario
+	 */
 
 	public void actionPerformed(ActionEvent e) {
 		String nome = inputNome.getText();
@@ -114,6 +145,12 @@ public class TelaCriacaoConta implements ActionListener {
 			new TelaLogin(dados);
 		}
 	}
+	
+	/**
+	 * Cria uma página de cadastro.
+	 * 
+	 * @param args
+	 */
 	
 	public static void main(String[] args) {
 		 new TelaCriacaoConta();

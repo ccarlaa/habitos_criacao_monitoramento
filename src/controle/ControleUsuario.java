@@ -17,8 +17,9 @@ public class ControleUsuario {
     * Se os emails corresponderem o id do usuário é retornado ao front.
     * 
     *
-    * @param email: o email do usuário
-    * @param dados: a fonte de dados onde o usuário será buscado
+    * @param email o email do usuário
+    * @param dados a fonte de dados onde o usuário será buscado
+    * 
     * @return o id do usuário
     *
     * @see Usuario
@@ -41,17 +42,20 @@ public class ControleUsuario {
      * caso ocorra erro. Se a validação for bem sucedida os dados do usuário são salvos na classe Dados.
      * 
      * É verificado:
-     * - se a senha contem no mínimo 4 caracteres;
-     * - se as senha e a senha de verificação são iguais;
-     * - se já existe um usuário cadastrado com o email em questão;
-     * - se o email está no formato certo;
-     * - se o nome não está em branco.
+	 * <ol>
+	 * 	<li>se a senha contem no mínimo 4 caracteres;</li>
+	 *  <li>se as senha e a senha de verificação são iguais;</li>
+	 *  <li>se já existe um usuário cadastrado com o email em questão;</li>
+	 *  <li>se o email está no formato certo;</li>
+	 *  <li>se o nome não está em branco.</li>
+	 * </ol>
      * 
-     * @param dados
-     * @param nome
-     * @param email
-     * @param senha
-     * @param senhaRepetida
+	 * @param dados todas as informações salvas
+	 * @param email email do usuário
+	 * @param senha senha do usuário
+     * @param nome nome do usuário
+     * @param senhaRepetida senha do usuário
+     * 
      * @return mensagem
      * 
      * @see ControleDados
@@ -86,10 +90,11 @@ public class ControleUsuario {
 	 * O método logar faz a validação do email e senha inseridos pelo usuário comparando-os dados de cadastro
 	 * e, em casa de falha na validação, retorna uma mensagem com o erro.
 	 * 
-	 * @param dados
-	 * @param email
-	 * @param senha
-	 * @return mensagem
+	 * @param dados todas as informações salvas
+	 * @param email email do usuário
+	 * @param senha senha do usuário
+	 * 
+	 * @return mensagem 
 	 * 
 	 * @see ControleDados
 	 * @see Usuario

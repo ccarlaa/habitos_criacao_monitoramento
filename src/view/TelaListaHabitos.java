@@ -1,17 +1,13 @@
 package view;
-import controle.*;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,6 +17,13 @@ import javax.swing.event.ListSelectionListener;
 import controle.ControleDados;
 import controle.ControleHabitos;
 import controle.ControleUsuario;
+
+/**
+ * Responsável por definir o layout da tela de hábitos, além de possibilitar que o usuário
+ * possa escolher criar novos hábitos, ver os hábitos previstos para o dia atual e editá-los
+ * 
+ * @author carla
+ */
 
 public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 	private JList<String> listaHabitosMensuraveis;
@@ -38,7 +41,6 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 	private String[] listaHabitosSimNaoInfos;
 	String diaEscolhido;
 	String emailUsuario;
-	List<String> diasDaSemana = new ArrayList();
 	String[] arrayDeDias = new String[7];
 	String[] dias = {
 			"segunda-feira",
@@ -49,6 +51,24 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 			"sábado",
 			"domingo"
 		};
+	
+	/**
+	 * Define os elementos presentes na tela de hábitos.
+	 * 
+	 * - listaHabitosMensuraveis: mostra os hábitos do tipo "mensurável" previstos para serem realizados 
+	 * no dia atual. Possui um evento associado, que quando disparado (ao clicar em um dos hábitos) redireciona
+	 * o usuário para página de edição do hábito.
+	 * - listaHabitosSimNao: mostra os hábitos do tipo "sim não" previstos para serem realizados 
+	 * no dia atual. Possui um evento associado, que quando disparado (ao clicar em um dos hábitos) redireciona
+	 * o usuário para página de edição do hábito.
+	 * - botao1: Possui um evento associado que quando disparado direciona o usuário para página de criação de 
+	 * hábito do tipo "mensurável"
+	 * - botao2: Possui um evento associado que quando disparado direciona o usuário para página de criação de 
+	 * hábito do tipo "sim não"
+	 * 
+	 * @param email
+	 * @param d
+	 */
 	
 	public TelaListaHabitos(String email,ControleDados d) {
 		dadosHabitos = new ControleHabitos();
@@ -109,7 +129,17 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		listaHabitosMensuraveis.addListSelectionListener(this);
 		listaHabitosSimNao.addListSelectionListener(this);
 	}
-
+	
+	/**
+	 * Quando um evento é disparado no componente "botao1" redireciona o usuário para a página
+	 * de criação de hábito do tipo "mensurável".
+	 * Quando um evento é disparado no componente "botao2" redireciona o usuário para a página
+	 * de criação de hábito do tipo "sim não".
+	 * 
+	 * @see TelaHabitoMensuravel
+	 * @see TelaHabitoSimNao
+	 */
+	
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		
@@ -121,7 +151,15 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 			new TelaHabitoSimNao(emailUsuario, dados, -1, false);
 		}
 	}
-	
+	/**
+	 * Quando um evento é disparado na lista de hábitos do tipo "mensurável" redireciona o usuário para a página
+	 * de edição de hábito do tipo "mensurável".
+	 * Quando um evento é disparado na lista de hábitos do tipo "sim não" redireciona o usuário para a página
+	 * de edição de hábito do tipo "sim não".
+	 * 
+	 * @see TelaHabitoMensuravel
+	 * @see TelaHabitoSimNao
+	 */
 	public void valueChanged(ListSelectionEvent e) {
 		Object src = e.getSource();
 

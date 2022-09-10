@@ -14,6 +14,13 @@ import controle.ControleDados;
 import controle.ControleHabitos;
 import controle.ControleUsuario;
 
+/**
+ * Responsável por realizar a criação de um hábito do tipo "mensurável" e fazer a edição do mesmo,
+ * além de definir o layout da página.
+ * 
+ * @author carla
+ */
+
 public class TelaHabitoMensuravel implements ActionListener {
 	private static JFrame container;
 	private static JButton botaoAddLembrete;
@@ -26,7 +33,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 	private static JTextField inputNome;
 	private static JLabel inserirNome;
 	private static JLabel inserirAnotacao;
-	private static JLabel inserirUnidade;
+	private static JLabel inserirMinimo;
 	private static JLabel inserirMeta;
 	private static JLabel inserirLembrete;
 	private static ControleDados dados;
@@ -54,6 +61,37 @@ public class TelaHabitoMensuravel implements ActionListener {
 	int index;
 	int indexLembrete = -1;
 	
+	/**
+	 * Define os elementos presentes na tela de hábitos do tipo "mensurável"
+	 * Recebe os dados necessários para realizar as operações, a posição (idx) do hábito
+	 * no array habitoSimNao da classe Dados, o email do usuário e se a operação é de 
+	 * edição do hábito.
+	 * 
+	 * <ol>
+	 * 	<li>inputNome: recebe o nome do hábito;</li>
+	 *  <li>inserirMinimo: recebe a quantidade mínimo que esse hábito deve ser realizado; </li>
+	 *  <li>inserirMeta: recebe a meta do hábito;</li>
+	 *  <li>inputAnotacao: recebe as anotações;</li>
+	 *  <li>lembretes: lista de lembretes criados. Possui um método assiado para detectar a 
+	 * posição do lembrete no array de lembretes;</li>
+	 *  <li>botaoAddLembrete: possui um evento associado que adiciona o lembrete selecionado 
+	 * da lista de lembretes;</li>
+	 *  <li>deletarLembrete: possui um evento associado que deleta o lembrete selecionado 
+	 * da lista de lembretes;</li>
+	 *  <li>updateHabito: possui um evento associado que atualiza as informações do hábito
+	 * selecionado;</li>
+	 *  <li>deletarHabito: possui um evento associado que deleta o hábito selecionado;</li>
+	 *  <li>botaoFeito: possui um evento associado que atualiza o hábito selecionado para "feito".</li>
+	 * </ol>
+	 * 
+	 * @param email email do usuário
+	 * @param d todos os dados salvos
+	 * @param idx posição do hábito no array habitoSimNao da classe Dados
+	 * @param editar define o tipo de operação
+	 * 
+	 * @see ControleHabitos
+	 */
+	
 	public TelaHabitoMensuravel(String email, ControleDados d, int idx, boolean editar) {
 		dados = d;
 		emailUsuario = email;
@@ -67,7 +105,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 		inserirLembrete = new JLabel("Adicionar lembrete:");
 		inserirNome = new JLabel("Nome:");
 		inserirAnotacao = new JLabel("Anotações:");
-		inserirUnidade = new JLabel("Mínimo:");
+		inserirMinimo = new JLabel("Mínimo:");
 		inserirMeta = new JLabel("Meta:");
 		selecaoDias = new JComboBox<>(dias);
 		botaoFeito = new JButton("Hábito feito");
@@ -139,8 +177,8 @@ public class TelaHabitoMensuravel implements ActionListener {
 		
 		inputMinimo.setBounds(100, 210, 300, 30);
 		
-		inserirUnidade.setFont(new Font("Arial", Font.BOLD, 16));
-		inserirUnidade.setBounds(100, 170, 300, 30);
+		inserirMinimo.setFont(new Font("Arial", Font.BOLD, 16));
+		inserirMinimo.setBounds(100, 170, 300, 30);
 		
 		inputMeta.setBounds(100, 130, 300, 30);
 		
@@ -168,7 +206,7 @@ public class TelaHabitoMensuravel implements ActionListener {
 		container.add(inserirLembrete);
 		container.add(inserirNome);
 		container.add(inserirAnotacao);
-		container.add(inserirUnidade);
+		container.add(inserirMinimo);
 		container.add(inserirMeta);
 		container.add(selecaoDias);
 		container.add(inputHora);
@@ -190,6 +228,26 @@ public class TelaHabitoMensuravel implements ActionListener {
 		
 		container.setVisible(true);
 	}
+	
+	/**
+	 * Adiciona um lembrete a lista de lembretes quando um evento é disparado no componente "botaoAddLembrete", 
+	 * caso a validação seja bem sucedida.
+	 * É validado se: 
+	 * <ol>
+	 * 	<li>todos os campos devem ser preenchidos;</li>
+	 *  <li>o horário escolhido deve ser um horário existente</li>
+	 * </ol>
+	 *  
+	 * Deleta um lembrete da lista de lembretes quando um evento é disparado no componente "deletarLembrete"
+	 * Adiciona um hábito quando um evento é disparado no componente "adicionarHabito"
+	 * Deleta um hábito quando um evento é disparado no componente "deletarHabito"
+	 * Atualiza um hábito para feito quando um evento é disparado no componente "botaoFeito"
+	 * Atualiza as infortmações de um hábito quando um evento é disparado no componente "updateHabito"
+	 * 
+	 * Em todos os casos, se a operação não for bem sucedida, é gerado um aviso na tela contendo o problema.
+	 * 
+	 * @see ControleHabitos
+	 */
 
 	public void actionPerformed(ActionEvent e) {
 		String nome = inputNome.getText();

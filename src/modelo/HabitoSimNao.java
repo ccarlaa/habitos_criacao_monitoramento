@@ -17,13 +17,13 @@ public class HabitoSimNao extends Habito {
 	 * Método construtor da classe HabitoSimNao que herda os métotos e atributos 
 	 * da classe abstrata Habito
 	 * 
-	 * @param nome
-	 * @param anotacoes
-	 * @param horarios
-	 * @param dias
-	 * @param id
-	 * @param feito
-	 * @param frequenciaPrevista
+	 * @param nome nome do hábito
+	 * @param anotacoes anorações do hábito
+	 * @param horarios horários que o hábito deve ser realizado
+	 * @param dias dias que o hábito deve ser realizado
+	 * @param id identificador do usuário criador do hábito
+	 * @param feito identifica se hábito foi ou não feito
+	 * @param frequenciaPrevista frequência que o hábito deve ser realizado
 	 * 
 	 * @see Habito
 	 */
@@ -37,7 +37,7 @@ public class HabitoSimNao extends Habito {
 	/**
 	 * Retorna a frequência que o hábito deve ser realizado
 	 * 
-	 * @return
+	 * @return frequência do hábito
 	 */
 
 	public String getFrequenciaPrevista() {
@@ -47,7 +47,7 @@ public class HabitoSimNao extends Habito {
 	/**
 	 * Define com que frequência o hábito deve ser realizado
 	 * 
-	 * @param frequenciaPrevista
+	 * @param frequenciaPrevista frequência que o hábito deve ser realizado
 	 */
 	
 	public void setFrequenciaPrevista(String frequenciaPrevista) {

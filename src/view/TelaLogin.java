@@ -23,6 +23,20 @@ public class TelaLogin implements ActionListener{
 	private static ControleDados dados;
 	private static ControleUsuario dadosUsuario = new ControleUsuario();
 	
+	/**
+	 * Define os componentes presentes na página de login.
+	 * Recebe os dados necessários para realizar o login do usuário.
+	 * 
+	 * <ol>
+	 * 	<li>inputEmail: recebe o email do usuário;</li>
+	 *  <li>inputSenha: recebe a senha do usuário</li>
+	 *  <li>botao: possui um evento associado que quando disparado efetua o login do usuário</li>
+	 *  <li>criarConta: redireciona o usuário para página de cadastro</li>
+	 * </ol>
+	 * 
+	 * @param d todos os dados salvos
+	 */
+	
 	public TelaLogin(ControleDados d) {
 		dados = d;
 		
@@ -75,6 +89,16 @@ public class TelaLogin implements ActionListener{
 		    }
 		);
 	}
+	
+	/**
+	 * Quando um evento é disparado no componente "botao" realiza o login do usuário.
+	 * Se o login não foi realizadado, é mostrado um aviso na tela, caso contrário o usuário
+	 * é direcionado para a página de hábitos.
+	 * 
+	 * @see ControleUsuario
+	 * @see TelaListaHabitos
+	 * @see TelaCriacaoConta
+	 */
 	
 	public void actionPerformed(ActionEvent e) {
 		String email = inputEmail.getText();

@@ -7,6 +7,14 @@ import org.junit.Test;
 import controle.*;
 import modelo.Usuario;
 
+/**
+ * A classe TesteUsuario é responsável por realizar os testes dos métodos 
+ * da classe ControleUsuario
+ * 
+ * @author carolina 
+ *
+ */
+
 public class TesteUsuario {
     ControleUsuario controleUsuario = new ControleUsuario();
     ControleDados dados = new ControleDados();

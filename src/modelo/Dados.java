@@ -39,7 +39,7 @@ public class Dados {
 	/**
 	 * Retorna as informações dos usuários cadastrados
 	 * 
-	 * @return Usuario []
+	 * @return informações de todos os usuários
 	 */
 	
 	public Usuario[] getUsuarios() {
@@ -49,7 +49,7 @@ public class Dados {
 	/**
 	 * Salva os dados de um usuário cadastrado
 	 * 
-	 * @param usuarios
+	 * @param usuarios informações do usuário
 	 */
 	
 	public void setUsuarios(Usuario usuarios) {
@@ -59,7 +59,7 @@ public class Dados {
 	/**
 	 * Retorna a quantidade de usuários cadastrados
 	 * 
-	 * @return
+	 * @return qauntiade de usuários
 	 */
 	
 	public int getQtdUsuario() {
@@ -69,7 +69,7 @@ public class Dados {
 	/**
 	 * Define a quantidade de usuários cadastrados
 	 * 
-	 * @param qtdUsuario
+	 * @param qtdUsuario quantidade de usuários
 	 */
 	
 	public void setQtdUsuario(int qtdUsuario) {
@@ -89,8 +89,8 @@ public class Dados {
 	/**
 	 * Salva um hábito do tipo "Sim Nao" cadastrado
 	 * 
-	 * @param habitoSimNao
-	 * @param index
+	 * @param habitoSimNao informações do hábito do tipo "sim não"
+	 * @param index posição no array
 	 */
 	
 	public void setHabitoSimNao(HabitoSimNao habitoSimNao, int index) {
@@ -100,7 +100,7 @@ public class Dados {
 	/**
 	 * Retorna a quantidade de hábitos do tipo "Sim Nao" cadastrados
 	 * 
-	 * @return
+	 * @return quantidade de hábitos do tipo "sim não"
 	 */
 	
 	public int getQtdHabitosSimNao() {
@@ -110,7 +110,7 @@ public class Dados {
 	/**
 	 * Define a quantidade de hábitos do tipo "Sim Não" cadastrados
 	 * 
-	 * @param qtdHabitosSimNao
+	 * @param qtdHabitosSimNao qauntidade de hábitos do tipo "sim não"
 	 */
 	
 	public void setQtdHabitosSimNao(int qtdHabitosSimNao) {
@@ -120,7 +120,7 @@ public class Dados {
 	/**
 	 * Retorna os hábitos do tipo "Mensurável" cadastrados
 	 * 
-	 * @return
+	 * @return todos os hábitos do tipo "mensurável"
 	 */
 	
 	public HabitoMensuravel[] getHabitoMensuravel() {
@@ -130,8 +130,8 @@ public class Dados {
 	/**
 	 * Salva um hábito do tipo "Mensurável" cadastrado
 	 * 
-	 * @param habitoMensuravel
-	 * @param index
+	 * @param habitoMensuravel informações do hábito do tipo "mensurável"
+	 * @param index posição no array
 	 */
 	
 	public void setHabitoMensuravel(HabitoMensuravel habitoMensuravel, int index) {
@@ -141,7 +141,7 @@ public class Dados {
 	/**
 	 * Retorna a quantidade de hábitos do tipo "Mensurável" cadastrados
 	 * 
-	 * @return
+	 * @return quantidade de hábitos do tipo "mensurável"
 	 */
 	
 	public int getQtdHabitoMensuravel() {
@@ -151,7 +151,7 @@ public class Dados {
 	/**
 	 * Define a quantiade de hábitos do tipo "Mensurável" cadastrados
 	 * 
-	 * @param qtdHabitoMensuravel
+	 * @param qtdHabitoMensuravel quantidade de hábitos do tipo "mensurável"
 	 */
 	
 	public void setQtdHabitoMensuravel(int qtdHabitoMensuravel) {

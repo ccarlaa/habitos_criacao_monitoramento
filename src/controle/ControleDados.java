@@ -24,7 +24,9 @@ public class ControleDados {
 	/**
 	 * Retorna as informações dos usuário cadastrados
 	 * 
-	 * @return
+	 * @return as informações dos usuários cadastrados
+	 * 
+	 * @see Dados
 	 */
 	
 	public Usuario[] getUsuarios() {
@@ -34,7 +36,9 @@ public class ControleDados {
 	/**
 	 * Retorna a quantidade de usuário cadastrados
 	 * 
-	 * @return
+	 * @return quantidade de usuários
+	 * 
+	 * @see Dados
 	 */
 	
 	public int getQtdUsuarios() {
@@ -44,7 +48,9 @@ public class ControleDados {
 	/**
 	 * Define a quantidade de usuários
 	 * 
-	 * @param valor
+	 * @param valor quantiade de usuários
+	 * 
+	 * @see Dados
 	 */
 	
 	public void setQtdUsuarios(int valor) {
@@ -54,7 +60,9 @@ public class ControleDados {
 	/**
 	 * Define um novo usuário
 	 * 
-	 * @param usuario
+	 * @param usuario informações do usuário
+	 * 
+	 * @see Dados
 	 */
 	
 	public void setUsuario(Usuario usuario) {
@@ -64,7 +72,9 @@ public class ControleDados {
 	/**
 	 * Retorna a quantidade de hábitos do tipo "mensurável"
 	 * 
-	 * @return
+	 * @return a qauntidade de hábitos do tipo "mensurável"
+	 * 
+	 * @see Dados
 	 */
 	
 	public int qtdHabitosMensuraveis() {
@@ -74,8 +84,10 @@ public class ControleDados {
 	/**
 	 * Define um novo hábito do tipo "mensurável" 
 	 * 
-	 * @param infos
-	 * @param index
+	 * @param infos informações do hábito do tipo "mensurável"
+	 * @param index posição no array
+	 * 
+	 * @see Dados
 	 */
 	
 	public void setHabitosMensuraveis(HabitoMensuravel infos, int index) {
@@ -85,7 +97,9 @@ public class ControleDados {
 	/**
 	 * Retorna todos os hábitos do tipo "mensurável"
 	 * 
-	 * @return
+	 * @return as informações dos hábitos do tipo "mensurável"
+	 * 
+	 * @see Dados
 	 */
 	
 	public HabitoMensuravel[] getHabitosMensuraveis() {
@@ -95,7 +109,9 @@ public class ControleDados {
 	/**
 	 * Define a quantidade de hábitos do tipo "mensurável"
 	 * 
-	 * @param valor
+	 * @param valor quantidade de hábitos do tipo "mensurável"
+	 * 
+	 * @see Dados
 	 */
 	
 	public void setQtdHabitosMensuraveis(int valor) {
@@ -105,7 +121,9 @@ public class ControleDados {
 	/**
 	 * Retorna a quantidade de hábitos do tipo "sim não"
 	 * 
-	 * @return
+	 * @return a quantidade de hábitos do tipo "sim não"
+	 * 
+	 * @see Dados
 	 */
 	
 	public int qtdHabitosSimNao() {
@@ -115,7 +133,9 @@ public class ControleDados {
 	/**
 	 * Retorna todos os hábitos do tipo "sim nao"
 	 * 
-	 * @return
+	 * @return a quantidade de hábitos do tipo "sim não"
+	 * 
+	 * @see Dados
 	 */
 	
 	public HabitoSimNao[] getHabitosSimNao() {
@@ -125,8 +145,10 @@ public class ControleDados {
 	/**
 	 * Define um novo hábito do tipo "sim não"
 	 * 
-	 * @param infos
-	 * @param index
+	 * @param infos informações do hábito do tipo "sim não"
+	 * @param index posição no array
+	 * 
+	 * @see Dados
 	 */
 	
 	public void setHabitosSimNao(HabitoSimNao infos, int index) {
@@ -136,7 +158,9 @@ public class ControleDados {
 	/**
 	 * Define a quantidade de hábitos do tipo "sim ou não"
 	 * 
-	 * @param valor
+	 * @param valor quantidade de hábitos do tipo "mensurável"
+	 * 
+	 * @see Dados
 	 */
 
 	public void setQtdHabitosSimNao(int valor) {
