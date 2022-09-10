@@ -251,10 +251,10 @@ public class TelaHabitoSimNao implements ActionListener {
 	 */
 
 	public void actionPerformed(ActionEvent e) {
-		String nome = inputNome.getText();
-		String anotacao = inputAnotacao.getText();
-		String frequencia = inputFrequencia.getText();
-		String horario = inputHora.getText();
+		String nome = inputNome.getText().trim();
+		String anotacao = inputAnotacao.getText().trim();
+		String frequencia = inputFrequencia.getText().trim();
+		String horario = inputHora.getText().trim();
 		String[] horarioSemMascara = horario.split(" : ");
 		boolean lembreteExiste = false;
 		String mensagem = "";

@@ -124,8 +124,8 @@ public class TelaCriacaoConta implements ActionListener {
 	 */
 
 	public void actionPerformed(ActionEvent e) {
-		String nome = inputNome.getText();
-		String email = inputEmail.getText();
+		String nome = inputNome.getText().trim();
+		String email = inputEmail.getText().trim();
 		char[] senha = inputSenha.getPassword();
 		char[] senhaRepetida = inputSenhaRepetida.getPassword();
 		

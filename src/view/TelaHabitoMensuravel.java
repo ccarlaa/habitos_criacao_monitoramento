@@ -109,7 +109,8 @@ public class TelaHabitoMensuravel implements ActionListener {
 		inserirMeta = new JLabel("Meta:");
 		selecaoDias = new JComboBox<>(dias);
 		botaoFeito = new JButton("Hábito feito");
-		
+		lembretes = new JList<String>(listaLembretes);
+
 		if(editar) {
 			inputNome = new JTextField(dados.getHabitosMensuraveis()[index].getNome());
 			inputAnotacao = new JTextField(dados.getHabitosMensuraveis()[index].getAnotacoes());
@@ -126,8 +127,8 @@ public class TelaHabitoMensuravel implements ActionListener {
 			qtdLembretes = listaLembretesCriados.length;
 			
 			updateHabito.setBounds(100, 630, 300, 30);
-			deletarHabito.setBounds(100, 770, 300, 30);
-			botaoFeito.setBounds(100, 810, 300, 30);
+			deletarHabito.setBounds(100, 670, 300, 30);
+			botaoFeito.setBounds(100, 710, 300, 30);
 			
 			container.add(deletarHabito);
 			container.add(updateHabito);
@@ -141,7 +142,6 @@ public class TelaHabitoMensuravel implements ActionListener {
 			inputAnotacao = new JTextField(10);
 			inputMinimo = new JTextField(10);
 			inputMeta = new JTextField(10);
-			lembretes = new JList<String>(listaLembretes);
 			adicionarHabito = new JButton("Adicionar hábito");
 			
 			adicionarHabito.setBounds(100, 660, 300, 30);
@@ -151,7 +151,6 @@ public class TelaHabitoMensuravel implements ActionListener {
 			adicionarHabito.addActionListener(this);
 		}
 		
-		lembretes = new JList<String>(listaLembretes);
 		
 		try {
 			inputHora = new JFormattedTextField(new MaskFormatter("## : ##"));
@@ -210,8 +209,9 @@ public class TelaHabitoMensuravel implements ActionListener {
 		container.add(inserirMeta);
 		container.add(selecaoDias);
 		container.add(inputHora);
+		container.add(lembretes);
+		container.add(deletarLembrete);
 
-		
 		botaoAddLembrete.addActionListener(this);
 		selecaoDias.addActionListener(this);
 		deletarLembrete.addActionListener(this);
@@ -250,11 +250,11 @@ public class TelaHabitoMensuravel implements ActionListener {
 	 */
 
 	public void actionPerformed(ActionEvent e) {
-		String nome = inputNome.getText();
-		String anotacao = inputAnotacao.getText();
-		String minimo = inputMinimo.getText();
-		String meta = inputMeta.getText();
-		String horario = inputHora.getText();
+		String nome = inputNome.getText().trim();
+		String anotacao = inputAnotacao.getText().trim();
+		String minimo = inputMinimo.getText().trim();
+		String meta = inputMeta.getText().trim();
+		String horario = inputHora.getText().trim();
 		String[] horarioSemMascara = horario.split(" : ");
 		boolean lembreteExiste = false;
 		String mensagem = "";

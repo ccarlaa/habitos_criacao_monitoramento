@@ -101,7 +101,7 @@ public class TelaLogin implements ActionListener{
 	 */
 	
 	public void actionPerformed(ActionEvent e) {
-		String email = inputEmail.getText();
+		String email = inputEmail.getText().trim();
 		char[] senha = inputSenha.getPassword();
 		
 		String stringSenha = String.valueOf(senha);
