@@ -3,7 +3,9 @@ package controle;
 import modelo.Usuario;
 
 /**
-* ControleUsuario é responsável por disponibilizar as funcionalidades relacionados ao usuário
+* A classe ControleUsuario é responsável pelas funcionalidades relacionados ao usuário
+* 
+* @author carla
 */
 
 public class ControleUsuario {
@@ -21,7 +23,6 @@ public class ControleUsuario {
     *
     * @see Usuario
     * @see ControleDados
-    * @see Dados
     */
 	
     public int getIdUsuario(String email, ControleDados dados) {
@@ -36,8 +37,8 @@ public class ControleUsuario {
     }
     
     /**
-     * O método criarUsuario valida os dados recebidos e retorna uma mensagem contendo as informações da validação.
-     * Se a validação foi bem sucedida os dados do usuário são salvos na classe Dados
+     * O método criarUsuario valida os dados recebidos e retorna uma mensagem contendo as informações da validação
+     * caso ocorra erro. Se a validação for bem sucedida os dados do usuário são salvos na classe Dados.
      * 
      * É verificado:
      * - se a senha contem no mínimo 4 caracteres;
@@ -53,7 +54,6 @@ public class ControleUsuario {
      * @param senhaRepetida
      * @return mensagem
      * 
-     * @see Dados
      * @see ControleDados
      * @see Usuario
      */
@@ -83,8 +83,8 @@ public class ControleUsuario {
 	}
 	
 	/**
-	 * O método logar faz a validação do email e senha inseridos pelo usuário com os dados de cadastro
-	 * e retorna uma mensagem com as informações da validação.
+	 * O método logar faz a validação do email e senha inseridos pelo usuário comparando-os dados de cadastro
+	 * e, em casa de falha na validação, retorna uma mensagem com o erro.
 	 * 
 	 * @param dados
 	 * @param email
@@ -93,7 +93,6 @@ public class ControleUsuario {
 	 * 
 	 * @see ControleDados
 	 * @see Usuario
-	 * @see Dados
 	 */
 	
 	public String logar(ControleDados dados, String email, String senha) {

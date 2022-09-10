@@ -61,7 +61,7 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 
 		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
 		listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
-		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNaoFiltrado(dados, usuarioId);
+		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNao(dados, usuarioId);
 		
 		container = new JFrame("Hábitos");
 		dia = new JLabel("Hoje é " + df.format(date));
@@ -72,6 +72,7 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		listaHabitosMensuraveis = new JList<String>(listaHabitosMensuraveisInfos);
 		listaHabitosSimNao = new JList<String>(listaHabitosSimNaoInfos);
 		
+		container.getContentPane().setBackground(Color.getHSBColor(217, 228, 241));
 		container.setTitle("Hábitos");
 		container.setSize(500, 600);
 		container.setLocation(500, 300);

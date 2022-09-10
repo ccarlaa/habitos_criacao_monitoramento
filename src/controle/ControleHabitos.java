@@ -8,7 +8,27 @@ import java.util.List;
 import modelo.HabitoMensuravel;
 import modelo.HabitoSimNao;
 
+/**
+ * A classe ControleHabitos é responsável pelas funcionalidades relacionados ao usuário
+ * 
+ * @author carla
+ */
+
 public class ControleHabitos {
+	
+	/**
+	 * Responsável por filtrar os hábitos do tipo "mensurável" por meio do identificador do usuário.
+	 * Retorna os nomes dos hábitos com um emoji se o hábito foi feito e sem caso contrário.
+	 * 
+	 * @param dados
+	 * @param usuarioId
+	 * 
+	 * @return habitos mensuraveis
+	 * 
+	 * @see ControleDados
+	 * @see Dados
+	 */
+	
 	public String[] getHabitosMensuraveis(ControleDados dados, int usuarioId) {
 		int qtdHabitos = 0;
 		for(int i = 0; i < dados.qtdHabitosMensuraveis(); i++) {
@@ -41,37 +61,22 @@ public class ControleHabitos {
 				}
 			}
 		}
-		
 		return habitos;
 	}
 	
-	public String[] getHabitosSimNao(ControleDados dados, int usuarioId) {
-		int qtdHabitos = 0;
-		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
-			if(dados.getHabitosSimNao()[i].getId() == usuarioId) {
-				qtdHabitos++;
-			}
-		}
-		
-		Date date = new Date();
-		DateFormat df = new SimpleDateFormat("EEEEE");
-		String dia = df.format(date);
-		String[] habitos = new String[qtdHabitos];
-		int tamanhoLista = 0;
-		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
-			if(dados.getHabitosSimNao()[i] != null) {
-				if(dados.getHabitosSimNao()[i].getId() == usuarioId ) {
-					List<String> lista = Arrays.asList(dados.getHabitosSimNao()[i].getDias());
-					if(lista.contains(dia)) {
-						habitos[tamanhoLista] = dados.getHabitosSimNao()[i].getNome();
-						tamanhoLista++;
-					}
-				}
-			}
-		}
-		
-		return habitos;
-	}
+	/**
+	 * Retorna a posição que se encontra as informações de um hábito do tipo "mensurável" no array 
+	 * "habitoMensuravel" da classe Dados.
+	 * 
+	 * @param dados
+	 * @param usuarioId
+	 * @param nome
+	 * 
+	 * @return index
+	 * 
+	 * @see ControleDados
+	 * @see Dados
+	 */
 	
 	public int getIndexHabitoMensuravel(ControleDados dados, int usuarioId, String nome) {
 		int index = -1;
@@ -86,6 +91,19 @@ public class ControleHabitos {
 		return index;
 	}
 	
+	/**
+	 * Retorna os lembretes do hábito do tipo "mensurável" presente na posição (index) especificada do 
+	 * array habitoMensuravel da classe Dados.
+	 * 
+	 * @param dados
+	 * @param index
+	 * 
+	 * @return lembretes
+	 * 
+	 * @see Dados
+	 * @see ControleDados
+	 */
+	
 	public String[] getLembretesHabitosMensuraveis(ControleDados dados, int index) {
 		String[] dias = dados.getHabitosMensuraveis()[index].getDias();
 		String[] horarios = dados.getHabitosMensuraveis()[index].getHorarios();
@@ -97,6 +115,37 @@ public class ControleHabitos {
 		}
 		return lembretes;
 	}
+	
+	/**
+	 * Responsável por definir um hábito do tipo "mensurável" como feito.
+	 * 
+	 * Valida se as informações do hábito estão corretas e se o hábito já não está marcado
+	 * como feito. Se a validação não for bem sucedida, retorna uma mensagem contendo o
+	 * problema.
+	 * 
+	 * Se a validação é bem sucedida, por meio da posição do hábito no array "habitoMensuravel"
+	 * da classe Dados, é realizada uma atualização dos dados. 
+	 * 
+	 * É validado:
+	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
+	 *	- se o hábito já foi feito
+	 * 
+	 * @param dados
+	 * @param index
+	 * @param id
+	 * @param nome
+	 * @param meta
+	 * @param minimo
+	 * @param anotacoes
+	 * @param horarios
+	 * @param dias
+	 * 
+	 * @return mensagem
+	 * 
+	 * @see ControleDados
+	 * @see Dados
+	 * @see HabitoMensuravel
+	 */
 	
 	public String habitoMensuravelFeito(
 			ControleDados dados, 
@@ -126,6 +175,34 @@ public class ControleHabitos {
 		return mensagem;
 	}
 	
+	/**
+	 * Responsável pela atualização de um hábito do tipo "mensurável", identificado por sua posição 
+	 * (index) no array "habitoMensuravel" da classe Dados.
+	 *  
+	 * Valida se as informações foram preenchidas e, em caso de erro, retorna uma mensagem
+	 * contendo o problema, caso contrário, atualiza as informções do hábito em questão.
+	 * 
+	 * É validado:
+	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
+	 * 
+	 * 
+	 * @param dados
+	 * @param index
+	 * @param id
+	 * @param nome
+	 * @param meta
+	 * @param minimo
+	 * @param anotacoes
+	 * @param horarios
+	 * @param dias
+	 * 
+	 * @return mensagem
+	 * 
+	 * @see ControleDados
+	 * @see Dados
+	 * @see HabitoMensuravel
+	 */
+	
 	public String updateHabitosMensuraveis(
 			ControleDados dados, 
 			int index, 
@@ -148,9 +225,47 @@ public class ControleHabitos {
 		return mensagem;
 	}
 	
+	/**
+	 * Apaga as informações de um hábito do tipo "mensurável" a partir da sua posição (index)
+	 * no array "habitoMensuravel" da classe Dados.
+	 * 
+	 * @param dados
+	 * @param index
+	 * 
+	 * @see Dados
+	 */
+	
 	public void deleteHabitoMensuravel(ControleDados dados, int index) {
 		dados.setHabitosMensuraveis(null, index);
 	}
+	
+	/**
+	 * Salva os dados de um novo hábito do tipo "mensurável" no array habitoMensuravel da classe Dados.
+	 * 
+	 * Para futura identificação é salvo junto as informações o identificador do usuário criador do
+	 * hábito.
+	 * 
+	 * Faz a validação dos dados e retorna uma mensagem em caso de erro explicando o problema.
+	 * 
+	 * É validado: 
+	 * 	- se todos os campos foram preenchidos, salvo "anotações"
+	 * 	- se já existe um hábito com o mesmo nome
+	 * 
+	 * @param dados
+	 * @param id
+	 * @param nome
+	 * @param meta
+	 * @param minimo
+	 * @param anotacoes
+	 * @param horarios
+	 * @param dias
+	 * 
+	 * @return mensagem
+	 * 
+	 * @see HabitoMensuravel
+	 * @see Dados
+	 * @see HabitoMensuravel
+	 */
 	
 	public String salvarHabitoMensuravel(
 			ControleDados dados,
@@ -182,42 +297,27 @@ public class ControleHabitos {
 			System.out.println(dados.toString());
 			return mensagem;
 		}
-		
-		public String salvarHabitoSimNao(
-				ControleDados dados,
-				int id,
-				String nome,
-				String frequencia,
-				String anotacoes,
-				String[] horarios,
-				String[] dias
-			) {
-				String mensagem = "";
-				int qtdHabitosSimNao = dados.qtdHabitosSimNao();
-				
-				if(nome.equals("") || anotacoes.equals("") || frequencia.equals("") || horarios[0] == null) {
-					return mensagem = "Preencha todos os campos";
-				}
-				
-				for(int i = 0; i < qtdHabitosSimNao; i++) {
-					if(dados.getHabitosSimNao()[i].getNome().equals(nome)) {
-						return mensagem = "Já existe um hábito sim não com esse nome";
-					}
-				}
-				
-				HabitoSimNao habito = new HabitoSimNao(nome, anotacoes, horarios, dias, id, false, frequencia);
-				dados.setHabitosSimNao(habito, qtdHabitosSimNao);
-				dados.setQtdHabitosSimNao(qtdHabitosSimNao + 1);
-					return mensagem;
-			}
 	
-	public String[] getHabitosSimNaoFiltrado(ControleDados dados, int usuarioId) {
+	/**
+	 * Responsável por filtrar os hábitos do tipo "sim não" por meio do identificador do usuário.
+	 * 
+	 * Retorna os nomes dos hábitos com um emoji se o hábito foi feito e sem caso contrário.
+	 * 
+	 * 
+	 * @param dados
+	 * @param usuarioId
+	 * 
+	 * @return mensagem
+	 * 
+	 * @see ControleDados
+	 * @see Dados
+	 */
+	
+	public String[] getHabitosSimNao(ControleDados dados, int usuarioId) {
 		int qtdHabitos = 0;
 		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
-			if(dados.getHabitosSimNao()[i] != null) {
-				if(dados.getHabitosSimNao()[i].getId() == usuarioId) {
-					qtdHabitos++;
-				}
+			if(dados.getHabitosSimNao()[i].getId() == usuarioId) {
+				qtdHabitos++;
 			}
 		}
 		
@@ -247,6 +347,73 @@ public class ControleHabitos {
 		return habitos;
 	}
 	
+	/**
+	 * Salva os dados de um novo hábito do tipo "sim não" no array habitoSimNao da classe Dados.
+	 * 
+	 * Para futura identificação é salvo junto as informações o identificador do usuário criador do
+	 * hábito.
+	 * 
+	 * Faz a validação dos dados e retorna uma mensagem em caso de erro explicando o problema.
+	 * 
+	 * É validado: 
+	 * 	- se todos os campos foram preenchidos, salvo "anotações"
+	 * 	- se já existe um hábito com o mesmo nome
+	 * 
+	 * @param dados
+	 * @param id
+	 * @param nome
+	 * @param frequencia
+	 * @param anotacoes
+	 * @param horarios
+	 * @param dias
+	 * 
+	 * @return mensagem
+	 * 
+	 * @see ControleDados
+	 * @see Dados
+	 */
+		
+	public String salvarHabitoSimNao(
+			ControleDados dados,
+			int id,
+			String nome,
+			String frequencia,
+			String anotacoes,
+			String[] horarios,
+			String[] dias
+		) {
+			String mensagem = "";
+			int qtdHabitosSimNao = dados.qtdHabitosSimNao();
+			
+			if(nome.equals("") || anotacoes.equals("") || frequencia.equals("") || horarios[0] == null) {
+				return mensagem = "Preencha todos os campos";
+			}
+			
+			for(int i = 0; i < qtdHabitosSimNao; i++) {
+				if(dados.getHabitosSimNao()[i].getNome().equals(nome)) {
+					return mensagem = "Já existe um hábito sim não com esse nome";
+				}
+			}
+			
+			HabitoSimNao habito = new HabitoSimNao(nome, anotacoes, horarios, dias, id, false, frequencia);
+			dados.setHabitosSimNao(habito, qtdHabitosSimNao);
+			dados.setQtdHabitosSimNao(qtdHabitosSimNao + 1);
+				return mensagem;
+		}
+	
+	/**
+	 * Retorna os lembretes do hábito do tipo "sim não" presente na posição (index) especificada do array habitoMensuravel
+	 * da classe Dados.
+	 * 
+	 * @param dados
+	 * @param index
+	 * 
+	 * @return lembretes
+	 * 
+	 * @see Dados
+	 * @see ControleDados
+	 */
+	
 	public String[] getLembretesHabitosSimNao(ControleDados dados, int index) {
 		String[] dias = dados.getHabitosSimNao()[index].getDias();
 		String[] horarios = dados.getHabitosSimNao()[index].getHorarios();
@@ -258,6 +425,37 @@ public class ControleHabitos {
 		}
 		return lembretes;
 	}
+	
+	/**
+	 * Responsável por definir um hábito do tipo "sim não" como feito.
+	 * 
+	 * Valida se as informações do hábito estão corretas e se o hábito já não está marcado
+	 * como feito. Se a validação não for bem sucedida, retorna uma mensagem contendo o
+	 * problema.
+	 * 
+	 * Se a validação é bem sucedida, por meio da posição do hábito no array "habitoSimNao"
+	 * da classe Dados, é realizada uma atualização dos dados. 
+	 * 
+	 * É validado:
+	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
+	 *	- se o hábito já foi feito
+	 * 
+	 * 
+	 * @param dados
+	 * @param index
+	 * @param id
+	 * @param nome
+	 * @param frequencia
+	 * @param anotacoes
+	 * @param horarios
+	 * @param dias
+	 * 
+	 * @return mensagem
+	 * 
+	 * @see Dados
+	 * @see ControleDados
+	 * @see HabitoSimNao
+	 */
 	
 	public String habitoSimNaoFeito(
 			ControleDados dados, 
@@ -285,6 +483,32 @@ public class ControleHabitos {
 		return mensagem;
 	}
 	
+	/**
+	 * Responsável pela atualização de um hábito do tipo "sim não", identificado por sua posição 
+	 * (index) no array "habitoSimNao" da classe Dados.
+	 *  
+	 * Valida se as informações foram preenchidas e, em caso de erro, retorna uma mensagem
+	 * contendo o problema, caso contrário, atualiza as informções do hábito em questão.
+	 * 
+	 * É validado:
+	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
+	 * 
+	 * @param dados
+	 * @param index
+	 * @param id
+	 * @param nome
+	 * @param frequencia
+	 * @param anotacoes
+	 * @param horarios
+	 * @param dias
+	 * 
+	 * @return mensagem
+	 * 
+	 * @see Dados
+	 * @see ControleDados
+	 * @see HabitoSimNao
+	 */
+	
 	public String updateHabitosSimNao(
 			ControleDados dados, 
 			int index, 
@@ -305,6 +529,17 @@ public class ControleHabitos {
 		
 		return mensagem;
 	}
+	
+	/**
+	 * Apaga as informações de um hábito do tipo "sim não" a partir da sua posição (index)
+	 * no array "habitoSimNao" da classe Dados
+	 * 
+	 * @param dados
+	 * @param index
+	 * 
+	 * @see Dados
+	 * @see ControleDados
+	 */
 	
 	public void deletarHabitoSimNao(ControleDados dados, int index) {
 		dados.setHabitosSimNao(null, index);
