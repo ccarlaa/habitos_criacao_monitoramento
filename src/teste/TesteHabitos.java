@@ -25,13 +25,13 @@ public class TesteHabitos {
 
     @Test
     public void getHabitosMensuraveis() {
-        controleHabitos.getHabitosMensuraveis(dados, 1);
+        controleHabitos.getHabitosMensuraveis(dados, 1, "segunda - feira");
         assertTrue(controleHabitos.equals(controleHabitos));
     }
 
     @Test
     public void getHabitosSimNao() {
-    	controleHabitos.getHabitosSimNao(dados, 1);
+    	controleHabitos.getHabitosSimNao(dados, 1, "segunda - feira");
         assertTrue(controleHabitos.equals(controleHabitos));
     }
 

@@ -1,8 +1,6 @@
 package controle;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import modelo.HabitoMensuravel;
@@ -17,18 +15,20 @@ import modelo.HabitoSimNao;
 public class ControleHabitos {
 	
 	/**
-	 * Responsável por filtrar os hábitos do tipo "mensurável" por meio do identificador do usuário.
+	 * Responsável por filtrar os hábitos do tipo "mensurável" por meio do identificador do usuário
+	 * e do dia da semana escolhido.
 	 * Retorna os nomes dos hábitos com um emoji se o hábito foi feito e sem caso contrário.
 	 * 
 	 * @param dados todas as informações salvas
 	 * @param usuarioId identificador do usuário
+	 * @param diaEscolhido dia da semana selecionado pelo usuário
 	 * 
 	 * @return habitos mensuraveis
 	 * 
 	 * @see ControleDados
 	 */
 	
-	public String[] getHabitosMensuraveis(ControleDados dados, int usuarioId) {
+	public String[] getHabitosMensuraveis(ControleDados dados, int usuarioId, String diaEscolhido) {
 		int qtdHabitos = 0;
 		for(int i = 0; i < dados.qtdHabitosMensuraveis(); i++) {
 			if(dados.getHabitosMensuraveis()[i] != null) {
@@ -38,9 +38,6 @@ public class ControleHabitos {
 			}
 		}
 		
-		Date date = new Date();
-		DateFormat df = new SimpleDateFormat("EEEEE");
-		String dia = df.format(date);
 		String[] habitos = new String[qtdHabitos];
 		int tamanhoLista = 0;
 		
@@ -48,7 +45,7 @@ public class ControleHabitos {
 			if(dados.getHabitosMensuraveis()[i] != null) {
 				if(dados.getHabitosMensuraveis()[i].getId() == usuarioId ) {
 					List<String> lista = Arrays.asList(dados.getHabitosMensuraveis()[i].getDias());
-					if(lista.contains(dia)) {
+					if(lista.contains(diaEscolhido)) {
 						if(dados.getHabitosMensuraveis()[i].isFeito() == false) {
 							habitos[tamanhoLista] = dados.getHabitosMensuraveis()[i].getNome();
 							tamanhoLista++;
@@ -295,25 +292,27 @@ public class ControleHabitos {
 			dados.setHabitosMensuraveis(habito, qtdHabitosMensuraveis);
 			dados.setQtdHabitosMensuraveis(qtdHabitosMensuraveis + 1);
 			
-			System.out.println(dados.toString());
 			return mensagem;
 		}
 	
 	/**
-	 * Responsável por filtrar os hábitos do tipo "sim não" por meio do identificador do usuário.
+	 * Responsável por filtrar os hábitos do tipo "sim não" por meio do identificador do usuário
+	 * e do dia da semana escolhido.
 	 * 
 	 * Retorna os nomes dos hábitos com um emoji se o hábito foi feito e sem caso contrário.
 	 * 
 	 * 
 	 * @param dados todas as informações salvas
 	 * @param usuarioId posição do hábito no array
+	 * @param diaEscolhido dia da semana selecionado pelo usuário
+
 	 * 
 	 * @return mensagem
 	 * 
 	 * @see ControleDados
 	 */
 	
-	public String[] getHabitosSimNao(ControleDados dados, int usuarioId) {
+	public String[] getHabitosSimNao(ControleDados dados, int usuarioId, String diaEscolhido) {
 		int qtdHabitos = 0;
 		for(int i = 0; i < dados.qtdHabitosSimNao(); i++) {
 			if(dados.getHabitosSimNao()[i].getId() == usuarioId) {
@@ -321,9 +320,6 @@ public class ControleHabitos {
 			}
 		}
 		
-		Date date = new Date();
-		DateFormat df = new SimpleDateFormat("EEEEE");
-		String dia = df.format(date);
 		String[] habitos = new String[qtdHabitos];
 		int tamanhoLista = 0;
 		
@@ -331,7 +327,7 @@ public class ControleHabitos {
 			if(dados.getHabitosSimNao()[i] != null) {
 				if(dados.getHabitosSimNao()[i].getId() == usuarioId ) {
 					List<String> lista = Arrays.asList(dados.getHabitosSimNao()[i].getDias());
-					if(lista.contains(dia)) {
+					if(lista.contains(diaEscolhido)) {
 						if(dados.getHabitosSimNao()[i].isFeito() == false) {
 							habitos[tamanhoLista] = dados.getHabitosSimNao()[i].getNome();
 							tamanhoLista++;
@@ -493,7 +489,10 @@ public class ControleHabitos {
 	 * contendo o problema, caso contrário, atualiza as informções do hábito em questão.
 	 * 
 	 * É validado:
-	 * 	- se todos os campos foram preenchidos, salvo o campo "anotações"
+	 * 
+	 * <ol>
+	 * 	<li>se todos os campos foram preenchidos, salvo o campo "anotações"</li>
+	 * </ol>
 	 * 
 	 * @param dados todas as informações salvas
 	 * @param index posição do hábito no array

@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -31,17 +32,19 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 	private static JFrame container;
 	private static JButton botao1;
 	private static JButton botao2;
+	private static JButton pesquisar;
 	private JLabel dia;
 	private JLabel habitosMensuraveis;
 	private JLabel habitosSimNao;
 	private  ControleDados dados;
 	private  ControleHabitos dadosHabitos;
 	private  ControleUsuario dadosUsuario;
-	private String[] listaHabitosMensuraveisInfos;
-	private String[] listaHabitosSimNaoInfos;
+	private String[] listaHabitosMensuraveisInfos = new String[50];
+	private String[] listaHabitosSimNaoInfos = new String[50];
 	String diaEscolhido;
 	String emailUsuario;
 	String[] arrayDeDias = new String[7];
+	private JComboBox<String> selecaoDias;
 	String[] dias = {
 			"segunda-feira",
 			"terça-feira",
@@ -55,12 +58,21 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 	/**
 	 * Define os elementos presentes na tela de hábitos.
 	 * 
-	 * - listaHabitosMensuraveis: mostra os hábitos do tipo "mensurável" previstos para serem realizados 
-	 * no dia atual. Possui um evento associado, que quando disparado (ao clicar em um dos hábitos) redireciona
-	 * o usuário para página de edição do hábito.
-	 * - listaHabitosSimNao: mostra os hábitos do tipo "sim não" previstos para serem realizados 
-	 * no dia atual. Possui um evento associado, que quando disparado (ao clicar em um dos hábitos) redireciona
-	 * o usuário para página de edição do hábito.
+	 * <ol>
+	 * <li>selecaoDias: permite selecionar o dia da semana desejado;</li>
+	 *  <li>pesquisar: possui um evento associado que busca os hábitos do dia escolhido quando disparado;</li>
+	 * 	<li>listaHabitosMensuraveis: mostra os hábitos do tipo "mensurável" previstos para serem realizados 
+	 * no dia escolhido. Possui um evento associado, que quando disparado (ao clicar em um dos hábitos) redireciona
+	 * o usuário para página de edição do hábito;</li>
+	 *  <li>listaHabitosSimNao: mostra os hábitos do tipo "sim não" previstos para serem realizados 
+	 * no dia escolhido. Possui um evento associado, que quando disparado (ao clicar em um dos hábitos) redireciona
+	 * o usuário para página de edição do hábito;</li>
+	 *  <li>botao1: Possui um evento associado que quando disparado direciona o usuário para página de criação de 
+	 * hábito do tipo "mensurável"</li>
+	 *  <li>botao2: Possui um evento associado que quando disparado direciona o usuário para página de criação de 
+	 * hábito do tipo "sim não"</li>
+	 * </ol>
+	 * 
 	 * - botao1: Possui um evento associado que quando disparado direciona o usuário para página de criação de 
 	 * hábito do tipo "mensurável"
 	 * - botao2: Possui um evento associado que quando disparado direciona o usuário para página de criação de 
@@ -78,13 +90,11 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("EEEEE");
-
-		int usuarioId = dadosUsuario.getIdUsuario(email, dados);
-		listaHabitosMensuraveisInfos = dadosHabitos.getHabitosMensuraveis(dados, usuarioId);
-		listaHabitosSimNaoInfos = dadosHabitos.getHabitosSimNao(dados, usuarioId);
 		
 		container = new JFrame("Hábitos");
-		dia = new JLabel("Hoje é " + df.format(date));
+		selecaoDias = new JComboBox<>(dias);
+		dia = new JLabel("(Hoje é " + df.format(date) + ")" );
+		pesquisar = new JButton("➡");
 		habitosMensuraveis = new JLabel("Hábitos Mensuráveis:");
 		habitosSimNao = new JLabel("Hábitos Sim Não:");
 		botao1 = new JButton("Mensurável");
@@ -99,8 +109,11 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		container.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		container.setLayout(null);
 		
-		dia.setFont(new Font("Arial", Font.BOLD, 20));
-		dia.setBounds(10, 10, 300, 30);
+		dia.setFont(new Font("Arial", Font.BOLD, 14));
+		dia.setBounds(10, 40, 300, 30);
+		
+		listaHabitosMensuraveis.setBounds(10, 100, 300, 200);
+		listaHabitosSimNao.setBounds(10, 350, 300, 200);
 		
 		habitosMensuraveis.setBounds(10,60,200,30);
 		habitosMensuraveis.setFont(new Font("Arial", Font.BOLD, 16));
@@ -108,8 +121,9 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		habitosSimNao.setBounds(10,315,200,30);
 		habitosSimNao.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		listaHabitosMensuraveis.setBounds(10, 100, 300, 200);
-		listaHabitosSimNao.setBounds(10, 350, 300, 200);
+		selecaoDias.setBounds(10, 10, 140, 30);
+		
+		pesquisar.setBounds(160, 10, 50, 30);
 		
 		botao1.setBounds(330, 100, 150, 40);
 		botao2.setBounds(330, 350, 150, 40);
@@ -117,10 +131,12 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		container.add(dia);
 		container.add(habitosMensuraveis);
 		container.add(habitosSimNao);
-		container.add(listaHabitosMensuraveis);
-		container.add(listaHabitosSimNao);
 		container.add(botao1);
 		container.add(botao2);
+		container.add(pesquisar);
+		container.add(listaHabitosMensuraveis);
+		container.add(listaHabitosSimNao);
+		container.add(selecaoDias);
 		
 		container.setVisible(true);
 		
@@ -128,6 +144,7 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		botao2.addActionListener(this);
 		listaHabitosMensuraveis.addListSelectionListener(this);
 		listaHabitosSimNao.addListSelectionListener(this);
+		pesquisar.addActionListener(this);
 	}
 	
 	/**
@@ -141,6 +158,8 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 	 */
 	
 	public void actionPerformed(ActionEvent e) {
+		int usuarioId = dadosUsuario.getIdUsuario(emailUsuario, dados);
+		
 		Object src = e.getSource();
 		
 		if(src == botao1) {
@@ -149,6 +168,23 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		
 		if(src == botao2) {
 			new TelaHabitoSimNao(emailUsuario, dados, -1, false);
+		}
+		
+		if(src == pesquisar) {
+			diaEscolhido = selecaoDias.getItemAt(selecaoDias.getSelectedIndex());
+			
+			String[] habitosMensuraveis = dadosHabitos.getHabitosMensuraveis(dados, usuarioId, diaEscolhido);
+			for(int i = 0; i < habitosMensuraveis.length; i++) {
+				listaHabitosMensuraveisInfos[i] = habitosMensuraveis[i];
+			}
+			
+			String[] habitosSimNao = dadosHabitos.getHabitosSimNao(dados, usuarioId, diaEscolhido);
+			for(int i = 0; i < habitosSimNao.length; i++) {
+				listaHabitosSimNaoInfos[i] = habitosSimNao[i];
+			}
+			
+			listaHabitosMensuraveis.updateUI();
+			listaHabitosSimNao.updateUI();
 		}
 	}
 	/**
@@ -169,7 +205,7 @@ public class TelaListaHabitos implements ActionListener, ListSelectionListener {
 		}
 		if(e.getValueIsAdjusting() && src == listaHabitosSimNao) {
 			int index = listaHabitosSimNao.getSelectedIndex();
-			System.out.println("oe");
+			System.out.println("index");
 			new TelaHabitoSimNao(emailUsuario, dados, index, true);
 		}
 	}
