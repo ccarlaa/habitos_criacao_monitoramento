@@ -24,16 +24,24 @@ public class TesteUsuario {
         assertTrue(controleUsuario.equals(controleUsuario));
     }
     
+    /**
+     * O teste é realizado para criar um usuário
+     */
+
     @Test
     public void criarUsuario() {
-    	controleUsuario.criarUsuario(dados,"Maria Jose Silva", "maria_jose3@hotmail.com", "majose12345", "majose12345");
+        controleUsuario.criarUsuario(dados,"Maria Jose Silva", "maria_jose3@hotmail.com", "majose12345", "majose12345");
         Usuario[] novoUsuario = dados.getUsuarios();
         assertTrue(novoUsuario.equals(novoUsuario));
     }
+    
+    /**
+     * O teste é realizado para logar um usuário já cadastrado
+     */
 
     @Test
     public void logar() {
-    	controleUsuario.logar(dados,"maria_jose3@hotmail.com", "majose12345");
+        controleUsuario.logar(dados,"maria_jose3@hotmail.com", "majose12345");
         Usuario[] loginUsuario = dados.getUsuarios();
         assertTrue(loginUsuario.equals(loginUsuario));
     }

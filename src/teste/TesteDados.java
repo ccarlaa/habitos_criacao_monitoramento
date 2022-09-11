@@ -15,7 +15,6 @@ import controle.ControleDados;
  */
 
 public class TesteDados {
-
     ControleDados controleDados = new ControleDados();
 
     @Test
@@ -38,6 +37,10 @@ public class TesteDados {
     public void setUsuarios() {
         assertTrue(controleDados.equals(controleDados));
     }
+    
+    /**
+    * O teste verifica a quantidade de Habitos do tipo "Mensuravel"
+    */
 
     @Test
     public void qtHabitosMensuraveis() {
@@ -53,6 +56,10 @@ public class TesteDados {
         controleDados.setQtdHabitosMensuraveis(0);
         assertTrue(controleDados.equals(controleDados));
     }
+    
+    /**
+     * O teste verifica a quantidade de Habitos do tipo "Sim e Não"
+     */
 
     @Test
     public void qtHabitosSimNao() {
